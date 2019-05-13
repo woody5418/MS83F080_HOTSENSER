@@ -1,0 +1,2627 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Mar 06 11:52:17 2019
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F685
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_System_init
+    43                           	FNCALL	_main,_GPIO_Init
+    44                           	FNCALL	_main,_ADC_Init
+    45                           	FNCALL	_main,_EEPROM_Init
+    46                           	FNCALL	_main,_Read_EEPROM_u16
+    47                           	FNCALL	_main,_LED_Study_End
+    48                           	FNCALL	_main,_ExchChannel
+    49                           	FNCALL	_main,_GetADCValue
+    50                           	FNCALL	_main,_Delay_xms
+    51                           	FNCALL	_main,_isKeyPressed
+    52                           	FNCALL	_main,_Write_EEPROM_u16
+    53                           	FNCALL	_LED_Study_End,_Delay_xms
+    54                           	FNCALL	_ADC_Init,_Delay_xms
+    55                           	FNCALL	_Write_EEPROM_u16,_Write_EEPROM_u8
+    56                           	FNCALL	_Read_EEPROM_u16,_Read_EEPROM_u8
+    57                           	FNCALL	_EEPROM_Init,_Write_EEPROM_u8
+    58                           	FNROOT	_main
+    59                           	FNCALL	intlevel1,_ISR
+    60                           	global	intlevel1
+    61                           	FNROOT	intlevel1
+    62                           	global	_ADC6_INPUT
+    63                           	global	_ADC_STUDY_VALUE
+    64                           	global	_ADC1_ADCOUT
+    65                           	global	_i
+    66                           	global	_j
+    67                           	global	_PSTRCON
+    68                           psect	text527,local,class=CODE,delta=2
+    69                           global __ptext527
+    70  0000                     __ptext527:
+    71  019D                     _PSTRCON	set	413
+    72                           	DABS	1,413,1	;_PSTRCON
+    73                           
+    74                           	global	_SRCON
+    75  019E                     _SRCON	set	414
+    76                           	DABS	1,414,1	;_SRCON
+    77                           
+    78                           	global	_C1SEN
+    79  0CF5                     _C1SEN	set	3317
+    80                           	DABS	1,414,1	;_C1SEN
+    81                           
+    82                           	global	_C2REN
+    83  0CF4                     _C2REN	set	3316
+    84                           	DABS	1,414,1	;_C2REN
+    85                           
+    86                           	global	_EEPGD
+    87  0C67                     _EEPGD	set	3175
+    88                           	DABS	1,396,1	;_EEPGD
+    89                           
+    90                           	global	_PULSR
+    91  0CF2                     _PULSR	set	3314
+    92                           	DABS	1,414,1	;_PULSR
+    93                           
+    94                           	global	_PULSS
+    95  0CF3                     _PULSS	set	3315
+    96                           	DABS	1,414,1	;_PULSS
+    97                           
+    98                           	global	_SR0
+    99  0CF6                     _SR0	set	3318
+   100                           	DABS	1,414,1	;_SR0
+   101                           
+   102                           	global	_SR1
+   103  0CF7                     _SR1	set	3319
+   104                           	DABS	1,414,1	;_SR1
+   105                           
+   106                           	global	_STRA
+   107  0CE8                     _STRA	set	3304
+   108                           	DABS	1,413,1	;_STRA
+   109                           
+   110                           	global	_STRB
+   111  0CE9                     _STRB	set	3305
+   112                           	DABS	1,413,1	;_STRB
+   113                           
+   114                           	global	_STRC
+   115  0CEA                     _STRC	set	3306
+   116                           	DABS	1,413,1	;_STRC
+   117                           
+   118                           	global	_STRD
+   119  0CEB                     _STRD	set	3307
+   120                           	DABS	1,413,1	;_STRD
+   121                           
+   122                           	global	_STRSYNC
+   123  0CEC                     _STRSYNC	set	3308
+   124                           	DABS	1,413,1	;_STRSYNC
+   125                           
+   126                           	global	_WREN
+   127  0C62                     _WREN	set	3170
+   128                           	DABS	1,396,1	;_WREN
+   129                           
+   130                           	global	_ADCON0
+   131  001F                     _ADCON0	set	31
+   132                           	global	_ADRESH
+   133  001E                     _ADRESH	set	30
+   134                           	global	_WDTCON
+   135  0018                     _WDTCON	set	24
+   136                           	global	_ADFM
+   137  00FF                     _ADFM	set	255
+   138                           	global	_ADON
+   139  00F8                     _ADON	set	248
+   140                           	global	_CARRY
+   141  0018                     _CARRY	set	24
+   142                           	global	_CHS0
+   143  00FA                     _CHS0	set	250
+   144                           	global	_CHS1
+   145  00FB                     _CHS1	set	251
+   146                           	global	_CHS2
+   147  00FC                     _CHS2	set	252
+   148                           	global	_CM0
+   149  00C8                     _CM0	set	200
+   150                           	global	_CM1
+   151  00C9                     _CM1	set	201
+   152                           	global	_CM2
+   153  00CA                     _CM2	set	202
+   154                           	global	_EEIF
+   155  0067                     _EEIF	set	103
+   156                           	global	_GIE
+   157  005F                     _GIE	set	95
+   158                           	global	_GO_DONE
+   159  00F9                     _GO_DONE	set	249
+   160                           	global	_PA6
+   161  002E                     _PA6	set	46
+   162                           	global	_PC1
+   163  0039                     _PC1	set	57
+   164                           	global	_PC3
+   165  003B                     _PC3	set	59
+   166                           	global	_VCFG0
+   167  00FD                     _VCFG0	set	253
+   168                           	global	_ADRESL
+   169  009E                     _ADRESL	set	158
+   170                           	global	_EEADR
+   171  009B                     _EEADR	set	155
+   172                           	global	_EECON1
+   173  009C                     _EECON1	set	156
+   174                           	global	_EECON2
+   175  009D                     _EECON2	set	157
+   176                           	global	_EEDAT
+   177  009A                     _EEDAT	set	154
+   178                           	global	_EEDATA
+   179  009A                     _EEDATA	set	154
+   180                           	global	_OPTION
+   181  0081                     _OPTION	set	129
+   182                           	global	_OSCCON
+   183  008F                     _OSCCON	set	143
+   184                           	global	_ADCS0
+   185  04FC                     _ADCS0	set	1276
+   186                           	global	_ADCS1
+   187  04FD                     _ADCS1	set	1277
+   188                           	global	_ADCS2
+   189  04FE                     _ADCS2	set	1278
+   190                           	global	_ANSEL0
+   191  0488                     _ANSEL0	set	1160
+   192                           	global	_ANSEL1
+   193  0489                     _ANSEL1	set	1161
+   194                           	global	_ANSEL2
+   195  048A                     _ANSEL2	set	1162
+   196                           	global	_ANSEL3
+   197  048B                     _ANSEL3	set	1163
+   198                           	global	_ANSEL4
+   199  048C                     _ANSEL4	set	1164
+   200                           	global	_ANSEL5
+   201  048D                     _ANSEL5	set	1165
+   202                           	global	_ANSEL6
+   203  048E                     _ANSEL6	set	1166
+   204                           	global	_ANSEL7
+   205  048F                     _ANSEL7	set	1167
+   206                           	global	_DIVS
+   207  04FF                     _DIVS	set	1279
+   208                           	global	_RD
+   209  04E0                     _RD	set	1248
+   210                           	global	_TRISA0
+   211  0428                     _TRISA0	set	1064
+   212                           	global	_TRISA1
+   213  0429                     _TRISA1	set	1065
+   214                           	global	_TRISA6
+   215  042E                     _TRISA6	set	1070
+   216                           	global	_TRISC1
+   217  0439                     _TRISC1	set	1081
+   218                           	global	_TRISC2
+   219  043A                     _TRISC2	set	1082
+   220                           	global	_TRISC3
+   221  043B                     _TRISC3	set	1083
+   222                           	global	_WPDA4
+   223  044C                     _WPDA4	set	1100
+   224                           	global	_WPDC1
+   225  044B                     _WPDC1	set	1099
+   226                           	global	_WPDC2
+   227  044A                     _WPDC2	set	1098
+   228                           	global	_WPDC3
+   229  0449                     _WPDC3	set	1097
+   230                           	global	_WPUA0
+   231  04A8                     _WPUA0	set	1192
+   232                           	global	_WPUA1
+   233  04A9                     _WPUA1	set	1193
+   234                           	global	_WPUA6
+   235  04AE                     _WPUA6	set	1198
+   236                           	global	_WPUC1
+   237  0441                     _WPUC1	set	1089
+   238                           	global	_WPUC2
+   239  0442                     _WPUC2	set	1090
+   240                           	global	_WPUC3
+   241  0443                     _WPUC3	set	1091
+   242                           	global	_WR
+   243  04E8                     _WR	set	1256
+   244                           	file	"ms83f080_hotsenser.as"
+   245                           	line	#
+   246                           psect cinit,class=CODE,delta=2
+   247                           global start_initialization
+   248  0235                     start_initialization:
+   249                           
+   250                           psect	bssCOMMON,class=COMMON,space=1
+   251                           global __pbssCOMMON
+   252  0076                     __pbssCOMMON:
+   253  0076                     _ADC1_ADCOUT:
+   254  0076                            ds      2
+   255                           
+   256  0078                     _i:
+   257  0078                            ds      1
+   258                           
+   259  0079                     _j:
+   260  0079                            ds      1
+   261                           
+   262                           psect	bssBANK0,class=BANK0,space=1
+   263                           global __pbssBANK0
+   264  002A                     __pbssBANK0:
+   265  002A                     _ADC6_INPUT:
+   266  002A                            ds      2
+   267                           
+   268  002C                     _ADC_STUDY_VALUE:
+   269  002C                            ds      2
+   270                           
+   271                           ; Clear objects allocated to COMMON
+   272                           psect cinit,class=CODE,delta=2
+   273  0235  01F6               	clrf	((__pbssCOMMON)+0)&07Fh
+   274  0236  01F7               	clrf	((__pbssCOMMON)+1)&07Fh
+   275  0237  01F8               	clrf	((__pbssCOMMON)+2)&07Fh
+   276  0238  01F9               	clrf	((__pbssCOMMON)+3)&07Fh
+   277                           ; Clear objects allocated to BANK0
+   278                           psect cinit,class=CODE,delta=2
+   279  0239  01AA               	clrf	((__pbssBANK0)+0)&07Fh
+   280  023A  01AB               	clrf	((__pbssBANK0)+1)&07Fh
+   281  023B  01AC               	clrf	((__pbssBANK0)+2)&07Fh
+   282  023C  01AD               	clrf	((__pbssBANK0)+3)&07Fh
+   283                           psect cinit,class=CODE,delta=2
+   284                           global end_of_initialization
+   285                           
+   286                           ;End of C runtime variable initialization code
+   287                           
+   288  023D                     end_of_initialization:
+   289  023D  0183               clrf status
+   290  023E  2811               ljmp _main	;jump to C main() function
+   291                           psect	cstackCOMMON,class=COMMON,space=1
+   292                           global __pcstackCOMMON
+   293  0070                     __pcstackCOMMON:
+   294                           	global	?_System_init
+   295  0070                     ?_System_init:	; 0 bytes @ 0x0
+   296                           	global	?_GPIO_Init
+   297  0070                     ?_GPIO_Init:	; 0 bytes @ 0x0
+   298                           	global	?_ADC_Init
+   299  0070                     ?_ADC_Init:	; 0 bytes @ 0x0
+   300                           	global	?_EEPROM_Init
+   301  0070                     ?_EEPROM_Init:	; 0 bytes @ 0x0
+   302                           	global	?_LED_Study_End
+   303  0070                     ?_LED_Study_End:	; 0 bytes @ 0x0
+   304                           	global	?_ExchChannel
+   305  0070                     ?_ExchChannel:	; 0 bytes @ 0x0
+   306                           	global	?_main
+   307  0070                     ?_main:	; 0 bytes @ 0x0
+   308                           	global	?_ISR
+   309  0070                     ?_ISR:	; 0 bytes @ 0x0
+   310                           	global	??_ISR
+   311  0070                     ??_ISR:	; 0 bytes @ 0x0
+   312                           	global	?_isKeyPressed
+   313  0070                     ?_isKeyPressed:	; 1 bytes @ 0x0
+   314                           	global	?_Read_EEPROM_u8
+   315  0070                     ?_Read_EEPROM_u8:	; 1 bytes @ 0x0
+   316  0070                     	ds	4
+   317                           	global	??_System_init
+   318  0074                     ??_System_init:	; 0 bytes @ 0x4
+   319                           	global	??_GPIO_Init
+   320  0074                     ??_GPIO_Init:	; 0 bytes @ 0x4
+   321                           	global	??_ExchChannel
+   322  0074                     ??_ExchChannel:	; 0 bytes @ 0x4
+   323                           	global	?_Delay_xms
+   324  0074                     ?_Delay_xms:	; 0 bytes @ 0x4
+   325                           	global	??_isKeyPressed
+   326  0074                     ??_isKeyPressed:	; 0 bytes @ 0x4
+   327                           	global	?_Write_EEPROM_u8
+   328  0074                     ?_Write_EEPROM_u8:	; 0 bytes @ 0x4
+   329                           	global	??_Read_EEPROM_u8
+   330  0074                     ??_Read_EEPROM_u8:	; 0 bytes @ 0x4
+   331                           	global	?_GetADCValue
+   332  0074                     ?_GetADCValue:	; 2 bytes @ 0x4
+   333                           	global	Write_EEPROM_u8@EEDatas
+   334  0074                     Write_EEPROM_u8@EEDatas:	; 1 bytes @ 0x4
+   335                           	global	Delay_xms@x
+   336  0074                     Delay_xms@x:	; 2 bytes @ 0x4
+   337  0074                     	ds	1
+   338                           	global	??_Write_EEPROM_u8
+   339  0075                     ??_Write_EEPROM_u8:	; 0 bytes @ 0x5
+   340                           	global	Write_EEPROM_u8@EEAddress
+   341  0075                     Write_EEPROM_u8@EEAddress:	; 1 bytes @ 0x5
+   342  0075                     	ds	1
+   343                           	global	??_ADC_Init
+   344  0076                     ??_ADC_Init:	; 0 bytes @ 0x6
+   345                           	global	??_LED_Study_End
+   346  0076                     ??_LED_Study_End:	; 0 bytes @ 0x6
+   347                           psect	cstackBANK0,class=BANK0,space=1
+   348                           global __pcstackBANK0
+   349  0020                     __pcstackBANK0:
+   350                           	global	??_EEPROM_Init
+   351  0020                     ??_EEPROM_Init:	; 0 bytes @ 0x0
+   352                           	global	??_GetADCValue
+   353  0020                     ??_GetADCValue:	; 0 bytes @ 0x0
+   354                           	global	??_Delay_xms
+   355  0020                     ??_Delay_xms:	; 0 bytes @ 0x0
+   356                           	global	?_Write_EEPROM_u16
+   357  0020                     ?_Write_EEPROM_u16:	; 0 bytes @ 0x0
+   358                           	global	Read_EEPROM_u8@EEAddress
+   359  0020                     Read_EEPROM_u8@EEAddress:	; 1 bytes @ 0x0
+   360                           	global	ExchChannel@ch_temp
+   361  0020                     ExchChannel@ch_temp:	; 1 bytes @ 0x0
+   362                           	global	Write_EEPROM_u16@EEDatas
+   363  0020                     Write_EEPROM_u16@EEDatas:	; 2 bytes @ 0x0
+   364  0020                     	ds	1
+   365                           	global	Read_EEPROM_u8@ReEepromData
+   366  0021                     Read_EEPROM_u8@ReEepromData:	; 1 bytes @ 0x1
+   367                           	global	ExchChannel@adc_ch_temp
+   368  0021                     ExchChannel@adc_ch_temp:	; 1 bytes @ 0x1
+   369  0021                     	ds	1
+   370                           	global	??_Write_EEPROM_u16
+   371  0022                     ??_Write_EEPROM_u16:	; 0 bytes @ 0x2
+   372                           	global	?_Read_EEPROM_u16
+   373  0022                     ?_Read_EEPROM_u16:	; 2 bytes @ 0x2
+   374                           	global	Delay_xms@i
+   375  0022                     Delay_xms@i:	; 2 bytes @ 0x2
+   376                           	global	GetADCValue@ADC_num
+   377  0022                     GetADCValue@ADC_num:	; 2 bytes @ 0x2
+   378  0022                     	ds	1
+   379                           	global	Write_EEPROM_u16@DATA_H
+   380  0023                     Write_EEPROM_u16@DATA_H:	; 1 bytes @ 0x3
+   381  0023                     	ds	1
+   382                           	global	??_Read_EEPROM_u16
+   383  0024                     ??_Read_EEPROM_u16:	; 0 bytes @ 0x4
+   384                           	global	Write_EEPROM_u16@DATA_L
+   385  0024                     Write_EEPROM_u16@DATA_L:	; 1 bytes @ 0x4
+   386  0024                     	ds	1
+   387                           	global	Write_EEPROM_u16@EEAddress
+   388  0025                     Write_EEPROM_u16@EEAddress:	; 1 bytes @ 0x5
+   389  0025                     	ds	1
+   390                           	global	Read_EEPROM_u16@EEAddress
+   391  0026                     Read_EEPROM_u16@EEAddress:	; 1 bytes @ 0x6
+   392  0026                     	ds	1
+   393                           	global	Read_EEPROM_u16@EepromData
+   394  0027                     Read_EEPROM_u16@EepromData:	; 2 bytes @ 0x7
+   395  0027                     	ds	2
+   396                           	global	??_main
+   397  0029                     ??_main:	; 0 bytes @ 0x9
+   398  0029                     	ds	1
+   399 ;;Data sizes: Strings 0, constant 0, data 0, bss 8, persistent 0 stack 0
+   400 ;;Auto spaces:   Size  Autos    Used
+   401 ;; COMMON          14      6      10
+   402 ;; BANK0           80     10      14
+   403 ;; BANK1           32      0       0
+   404                           
+   405 ;;
+   406 ;; Pointer list with targets:
+   407                           
+   408 ;; ?_GetADCValue	unsigned short  size(1) Largest target is 0
+   409 ;;
+   410 ;; ?_Read_EEPROM_u16	unsigned int  size(1) Largest target is 0
+   411 ;;
+   412                           
+   413                           
+   414 ;;
+   415 ;; Critical Paths under _main in COMMON
+   416 ;;
+   417 ;;   _main->_ExchChannel
+   418 ;;   _main->_GetADCValue
+   419 ;;   _main->_Delay_xms
+   420 ;;   _LED_Study_End->_Delay_xms
+   421 ;;   _ADC_Init->_Delay_xms
+   422 ;;   _Write_EEPROM_u16->_Write_EEPROM_u8
+   423 ;;   _Read_EEPROM_u16->_Read_EEPROM_u8
+   424 ;;   _EEPROM_Init->_Write_EEPROM_u8
+   425 ;;
+   426 ;; Critical Paths under _ISR in COMMON
+   427 ;;
+   428 ;;   None.
+   429 ;;
+   430 ;; Critical Paths under _main in BANK0
+   431 ;;
+   432 ;;   _main->_Read_EEPROM_u16
+   433 ;;   _LED_Study_End->_Delay_xms
+   434 ;;   _ADC_Init->_Delay_xms
+   435 ;;   _Read_EEPROM_u16->_Read_EEPROM_u8
+   436 ;;
+   437 ;; Critical Paths under _ISR in BANK0
+   438 ;;
+   439 ;;   None.
+   440 ;;
+   441 ;; Critical Paths under _main in BANK1
+   442 ;;
+   443 ;;   None.
+   444 ;;
+   445 ;; Critical Paths under _ISR in BANK1
+   446 ;;
+   447 ;;   None.
+   448                           
+   449 ;;
+   450 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   451 ;;
+   452                           
+   453 ;;
+   454 ;;Call Graph Tables:
+   455 ;;
+   456 ;; ---------------------------------------------------------------------------------
+   457 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   458 ;; ---------------------------------------------------------------------------------
+   459 ;; (0) _main                                                 1     1      0     895
+   460 ;;                                              9 BANK0      1     1      0
+   461 ;;                        _System_init
+   462 ;;                          _GPIO_Init
+   463 ;;                           _ADC_Init
+   464 ;;                        _EEPROM_Init
+   465 ;;                    _Read_EEPROM_u16
+   466 ;;                      _LED_Study_End
+   467 ;;                        _ExchChannel
+   468 ;;                        _GetADCValue
+   469 ;;                          _Delay_xms
+   470 ;;                       _isKeyPressed
+   471 ;;                   _Write_EEPROM_u16
+   472 ;; ---------------------------------------------------------------------------------
+   473 ;; (1) _LED_Study_End                                        0     0      0      68
+   474 ;;                          _Delay_xms
+   475 ;; ---------------------------------------------------------------------------------
+   476 ;; (1) _ADC_Init                                             0     0      0      68
+   477 ;;                          _Delay_xms
+   478 ;; ---------------------------------------------------------------------------------
+   479 ;; (1) _Write_EEPROM_u16                                     6     4      2     242
+   480 ;;                                              0 BANK0      6     4      2
+   481 ;;                    _Write_EEPROM_u8
+   482 ;; ---------------------------------------------------------------------------------
+   483 ;; (1) _Delay_xms                                            6     4      2      68
+   484 ;;                                              4 COMMON     2     0      2
+   485 ;;                                              0 BANK0      4     4      0
+   486 ;; ---------------------------------------------------------------------------------
+   487 ;; (1) _ExchChannel                                          4     4      0      99
+   488 ;;                                              4 COMMON     2     2      0
+   489 ;;                                              0 BANK0      2     2      0
+   490 ;; ---------------------------------------------------------------------------------
+   491 ;; (1) _Read_EEPROM_u16                                      7     5      2     201
+   492 ;;                                              2 BANK0      7     5      2
+   493 ;;                     _Read_EEPROM_u8
+   494 ;; ---------------------------------------------------------------------------------
+   495 ;; (1) _EEPROM_Init                                          1     1      0      44
+   496 ;;                                              0 BANK0      1     1      0
+   497 ;;                    _Write_EEPROM_u8
+   498 ;; ---------------------------------------------------------------------------------
+   499 ;; (2) _Read_EEPROM_u8                                       3     3      0      65
+   500 ;;                                              4 COMMON     1     1      0
+   501 ;;                                              0 BANK0      2     2      0
+   502 ;; ---------------------------------------------------------------------------------
+   503 ;; (2) _Write_EEPROM_u8                                      2     1      1      44
+   504 ;;                                              4 COMMON     2     1      1
+   505 ;; ---------------------------------------------------------------------------------
+   506 ;; (1) _isKeyPressed                                         0     0      0       0
+   507 ;; ---------------------------------------------------------------------------------
+   508 ;; (1) _GetADCValue                                          6     4      2     105
+   509 ;;                                              4 COMMON     2     0      2
+   510 ;;                                              0 BANK0      4     4      0
+   511 ;; ---------------------------------------------------------------------------------
+   512 ;; (1) _GPIO_Init                                            0     0      0       0
+   513 ;; ---------------------------------------------------------------------------------
+   514 ;; (1) _System_init                                          0     0      0       0
+   515 ;; ---------------------------------------------------------------------------------
+   516 ;; Estimated maximum stack depth 2
+   517 ;; ---------------------------------------------------------------------------------
+   518 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   519 ;; ---------------------------------------------------------------------------------
+   520 ;; (3) _ISR                                                  4     4      0       0
+   521 ;;                                              0 COMMON     4     4      0
+   522 ;; ---------------------------------------------------------------------------------
+   523 ;; Estimated maximum stack depth 3
+   524 ;; ---------------------------------------------------------------------------------
+   525                           
+   526 ;; Call Graph Graphs:
+   527                           
+   528 ;; _main (ROOT)
+   529 ;;   _System_init
+   530 ;;   _GPIO_Init
+   531 ;;   _ADC_Init
+   532 ;;     _Delay_xms
+   533 ;;   _EEPROM_Init
+   534 ;;     _Write_EEPROM_u8
+   535 ;;   _Read_EEPROM_u16
+   536 ;;     _Read_EEPROM_u8
+   537 ;;   _LED_Study_End
+   538 ;;     _Delay_xms
+   539 ;;   _ExchChannel
+   540 ;;   _GetADCValue
+   541 ;;   _Delay_xms
+   542 ;;   _isKeyPressed
+   543 ;;   _Write_EEPROM_u16
+   544 ;;     _Write_EEPROM_u8
+   545 ;;
+   546 ;; _ISR (ROOT)
+   547 ;;
+   548                           
+   549 ;; Address spaces:
+   550                           
+   551 ;;Name               Size   Autos  Total    Cost      Usage
+   552 ;;BITCOMMON            E      0       0       0        0.0%
+   553 ;;EEDATA             100      0       0       0        0.0%
+   554 ;;NULL                 0      0       0       0        0.0%
+   555 ;;CODE                 0      0       0       0        0.0%
+   556 ;;COMMON               E      6       A       1       71.4%
+   557 ;;BITSFR0              0      0       0       1        0.0%
+   558 ;;SFR0                 0      0       0       1        0.0%
+   559 ;;BITSFR1              0      0       0       2        0.0%
+   560 ;;SFR1                 0      0       0       2        0.0%
+   561 ;;STACK                0      0       2       2        0.0%
+   562 ;;BITBANK0            50      0       0       3        0.0%
+   563 ;;BANK0               50      A       E       4       17.5%
+   564 ;;BITBANK1            20      0       0       5        0.0%
+   565 ;;BITSFR2              0      0       0       5        0.0%
+   566 ;;SFR2                 0      0       0       5        0.0%
+   567 ;;BANK1               20      0       0       6        0.0%
+   568 ;;ABS                  0      0      18       7        0.0%
+   569 ;;DATA                 0      0      1A       8        0.0%
+   570                           
+   571                           	global	_main
+   572                           psect	maintext,global,class=CODE,delta=2
+   573                           global __pmaintext
+   574  0011                     __pmaintext:
+   575                           
+   576 ;; *************** function _main *****************
+   577 ;; Defined at:
+   578 ;;		line 35 in file "main.c"
+   579 ;; Parameters:    Size  Location     Type
+   580 ;;		None
+   581 ;; Auto vars:     Size  Location     Type
+   582 ;;		None
+   583 ;; Return value:  Size  Location     Type
+   584 ;;		None               void
+   585 ;; Registers used:
+   586 ;;		wreg, status,2, status,0, pclath, cstack
+   587 ;; Tracked objects:
+   588 ;;		On entry : 17F/0
+   589 ;;		On exit  : 0/0
+   590 ;;		Unchanged: 0/0
+   591 ;; Data sizes:     COMMON   BANK0   BANK1
+   592 ;;      Params:         0       0       0
+   593 ;;      Locals:         0       0       0
+   594 ;;      Temps:          0       1       0
+   595 ;;      Totals:         0       1       0
+   596 ;;Total ram usage:        1 bytes
+   597 ;; Hardware stack levels required when called:    3
+   598 ;; This function calls:
+   599 ;;		_System_init
+   600 ;;		_GPIO_Init
+   601 ;;		_ADC_Init
+   602 ;;		_EEPROM_Init
+   603 ;;		_Read_EEPROM_u16
+   604 ;;		_LED_Study_End
+   605 ;;		_ExchChannel
+   606 ;;		_GetADCValue
+   607 ;;		_Delay_xms
+   608 ;;		_isKeyPressed
+   609 ;;		_Write_EEPROM_u16
+   610 ;; This function is called by:
+   611 ;;		Startup code after reset
+   612 ;; This function uses a non-reentrant model
+   613 ;;
+   614                           psect	maintext
+   615                           	file	"main.c"
+   616                           	line	35
+   617                           	global	__size_of_main
+   618  00AA                     	__size_of_main	equ	__end_of_main-_main
+   619                           	
+   620  0011                     _main:	
+   621                           	opt	stack 5
+   622                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   623                           	line	36
+   624                           	
+   625  0011                     l7768:	
+   626                           # 36 "main.c"
+   627  0011  0064               clrwdt ;#
+   628                           psect	maintext
+   629                           	line	37
+   630                           	
+   631  0012                     l7770:	
+   632                           ;main.c: 37: System_init();
+   633  0012  2249               	fcall	_System_init
+   634                           	line	38
+   635                           	
+   636  0013                     l7772:	
+   637                           ;main.c: 38: GPIO_Init();
+   638  0013  2186               	fcall	_GPIO_Init
+   639                           	line	39
+   640                           	
+   641  0014                     l7774:	
+   642                           ;main.c: 39: ADC_Init();
+   643  0014  21C9               	fcall	_ADC_Init
+   644                           	line	40
+   645                           	
+   646  0015                     l7776:	
+   647                           ;main.c: 40: EEPROM_Init();
+   648  0015  2219               	fcall	_EEPROM_Init
+   649                           	line	41
+   650                           	
+   651  0016                     l7778:	
+   652                           ;main.c: 41: PC1=0;
+   653  0016  1283               	bcf	status, 5	;RP0=0, select bank0
+   654  0017  1303               	bcf	status, 6	;RP1=0, select bank0
+   655  0018  1087               	bcf	(57/8),(57)&7
+   656                           	line	42
+   657                           	
+   658  0019                     l7780:	
+   659                           ;main.c: 42: ADC_STUDY_VALUE = Read_EEPROM_u16(0x00);
+   660  0019  3000               	movlw	(0)
+   661  001A  20EC               	fcall	_Read_EEPROM_u16
+   662  001B  1283               	bcf	status, 5	;RP0=0, select bank0
+   663  001C  1303               	bcf	status, 6	;RP1=0, select bank0
+   664  001D  0823               	movf	(1+(?_Read_EEPROM_u16)),w
+   665  001E  01AD               	clrf	(_ADC_STUDY_VALUE+1)
+   666  001F  07AD               	addwf	(_ADC_STUDY_VALUE+1)
+   667  0020  0822               	movf	(0+(?_Read_EEPROM_u16)),w
+   668  0021  01AC               	clrf	(_ADC_STUDY_VALUE)
+   669  0022  07AC               	addwf	(_ADC_STUDY_VALUE)
+   670                           
+   671                           	line	43
+   672                           	
+   673  0023                     l7782:	
+   674                           ;main.c: 43: LED_Study_End();
+   675  0023  20BB               	fcall	_LED_Study_End
+   676  0024  2825               	goto	l7784
+   677                           	line	44
+   678                           ;main.c: 44: while(1){
+   679                           	
+   680  0025                     l1097:	
+   681                           	line	45
+   682                           	
+   683  0025                     l7784:	
+   684                           # 45 "main.c"
+   685  0025  0064               clrwdt ;#
+   686                           psect	maintext
+   687                           	line	46
+   688                           	
+   689  0026                     l7786:	
+   690                           ;main.c: 46: ExchChannel(1);
+   691  0026  3001               	movlw	(01h)
+   692  0027  213E               	fcall	_ExchChannel
+   693                           	line	47
+   694                           	
+   695  0028                     l7788:	
+   696                           ;main.c: 47: for(i=0;i<5;i++)
+   697  0028  01F8               	clrf	(_i)
+   698                           	
+   699  0029                     l7790:	
+   700  0029  3005               	movlw	(05h)
+   701  002A  0278               	subwf	(_i),w
+   702  002B  1C03               	skipc
+   703  002C  282E               	goto	u2511
+   704  002D  282F               	goto	u2510
+   705  002E                     u2511:
+   706  002E  2831               	goto	l7794
+   707  002F                     u2510:
+   708  002F  2845               	goto	l7800
+   709                           	
+   710  0030                     l7792:	
+   711  0030  2845               	goto	l7800
+   712                           	line	48
+   713                           	
+   714  0031                     l1098:	
+   715                           	
+   716  0031                     l7794:	
+   717                           ;main.c: 48: ADC1_ADCOUT = GetADCValue();
+   718  0031  2115               	fcall	_GetADCValue
+   719  0032  0875               	movf	(1+(?_GetADCValue)),w
+   720  0033  01F7               	clrf	(_ADC1_ADCOUT+1)
+   721  0034  07F7               	addwf	(_ADC1_ADCOUT+1)
+   722  0035  0874               	movf	(0+(?_GetADCValue)),w
+   723  0036  01F6               	clrf	(_ADC1_ADCOUT)
+   724  0037  07F6               	addwf	(_ADC1_ADCOUT)
+   725                           
+   726                           	line	47
+   727                           	
+   728  0038                     l7796:	
+   729  0038  3001               	movlw	(01h)
+   730  0039  1283               	bcf	status, 5	;RP0=0, select bank0
+   731  003A  1303               	bcf	status, 6	;RP1=0, select bank0
+   732  003B  00A9               	movwf	(??_main+0)+0
+   733  003C  0829               	movf	(??_main+0)+0,w
+   734  003D  07F8               	addwf	(_i),f
+   735                           	
+   736  003E                     l7798:	
+   737  003E  3005               	movlw	(05h)
+   738  003F  0278               	subwf	(_i),w
+   739  0040  1C03               	skipc
+   740  0041  2843               	goto	u2521
+   741  0042  2844               	goto	u2520
+   742  0043                     u2521:
+   743  0043  2831               	goto	l7794
+   744  0044                     u2520:
+   745  0044  2845               	goto	l7800
+   746                           	
+   747  0045                     l1099:	
+   748                           	line	49
+   749                           	
+   750  0045                     l7800:	
+   751                           ;main.c: 49: ExchChannel(6);
+   752  0045  3006               	movlw	(06h)
+   753  0046  213E               	fcall	_ExchChannel
+   754                           	line	50
+   755                           	
+   756  0047                     l7802:	
+   757                           ;main.c: 50: for(j=0;j<5;j++)
+   758  0047  01F9               	clrf	(_j)
+   759                           	
+   760  0048                     l7804:	
+   761  0048  3005               	movlw	(05h)
+   762  0049  0279               	subwf	(_j),w
+   763  004A  1C03               	skipc
+   764  004B  284D               	goto	u2531
+   765  004C  284E               	goto	u2530
+   766  004D                     u2531:
+   767  004D  2850               	goto	l7808
+   768  004E                     u2530:
+   769  004E  2864               	goto	l7814
+   770                           	
+   771  004F                     l7806:	
+   772  004F  2864               	goto	l7814
+   773                           	line	51
+   774                           	
+   775  0050                     l1100:	
+   776                           	
+   777  0050                     l7808:	
+   778                           ;main.c: 51: ADC6_INPUT = GetADCValue();
+   779  0050  2115               	fcall	_GetADCValue
+   780  0051  0875               	movf	(1+(?_GetADCValue)),w
+   781  0052  1283               	bcf	status, 5	;RP0=0, select bank0
+   782  0053  1303               	bcf	status, 6	;RP1=0, select bank0
+   783  0054  01AB               	clrf	(_ADC6_INPUT+1)
+   784  0055  07AB               	addwf	(_ADC6_INPUT+1)
+   785  0056  0874               	movf	(0+(?_GetADCValue)),w
+   786  0057  01AA               	clrf	(_ADC6_INPUT)
+   787  0058  07AA               	addwf	(_ADC6_INPUT)
+   788                           
+   789                           	line	50
+   790                           	
+   791  0059                     l7810:	
+   792  0059  3001               	movlw	(01h)
+   793  005A  00A9               	movwf	(??_main+0)+0
+   794  005B  0829               	movf	(??_main+0)+0,w
+   795  005C  07F9               	addwf	(_j),f
+   796                           	
+   797  005D                     l7812:	
+   798  005D  3005               	movlw	(05h)
+   799  005E  0279               	subwf	(_j),w
+   800  005F  1C03               	skipc
+   801  0060  2862               	goto	u2541
+   802  0061  2863               	goto	u2540
+   803  0062                     u2541:
+   804  0062  2850               	goto	l7808
+   805  0063                     u2540:
+   806  0063  2864               	goto	l7814
+   807                           	
+   808  0064                     l1101:	
+   809                           	line	52
+   810                           	
+   811  0064                     l7814:	
+   812                           ;main.c: 52: Delay_xms(5);
+   813  0064  3005               	movlw	low(05h)
+   814  0065  00F4               	movwf	(?_Delay_xms)
+   815  0066  3000               	movlw	high(05h)
+   816  0067  00F5               	movwf	((?_Delay_xms))+1
+   817  0068  2163               	fcall	_Delay_xms
+   818                           	line	54
+   819                           ;main.c: 54: if(isKeyPressed())
+   820  0069  223F               	fcall	_isKeyPressed
+   821  006A  3A00               	xorlw	0
+   822  006B  1903               	skipnz
+   823  006C  286E               	goto	u2551
+   824  006D  286F               	goto	u2550
+   825  006E                     u2551:
+   826  006E  289C               	goto	l7830
+   827  006F                     u2550:
+   828                           	line	56
+   829                           	
+   830  006F                     l7816:	
+   831                           ;main.c: 55: {
+   832                           ;main.c: 56: PA6=1;
+   833  006F  1283               	bcf	status, 5	;RP0=0, select bank0
+   834  0070  1303               	bcf	status, 6	;RP1=0, select bank0
+   835  0071  1705               	bsf	(46/8),(46)&7
+   836                           	line	57
+   837                           	
+   838  0072                     l7818:	
+   839                           ;main.c: 57: if(ADC_STUDY_VALUE>6)
+   840  0072  3000               	movlw	high(07h)
+   841  0073  022D               	subwf	(_ADC_STUDY_VALUE+1),w
+   842  0074  3007               	movlw	low(07h)
+   843  0075  1903               	skipnz
+   844  0076  022C               	subwf	(_ADC_STUDY_VALUE),w
+   845  0077  1C03               	skipc
+   846  0078  287A               	goto	u2561
+   847  0079  287B               	goto	u2560
+   848  007A                     u2561:
+   849  007A  2884               	goto	l7822
+   850  007B                     u2560:
+   851                           	line	58
+   852                           	
+   853  007B                     l7820:	
+   854                           ;main.c: 58: ADC_STUDY_VALUE = ADC1_ADCOUT-5;
+   855  007B  0876               	movf	(_ADC1_ADCOUT),w
+   856  007C  3EFB               	addlw	low(0FFFBh)
+   857  007D  00AC               	movwf	(_ADC_STUDY_VALUE)
+   858  007E  0877               	movf	(_ADC1_ADCOUT+1),w
+   859  007F  1803               	skipnc
+   860  0080  3E01               	addlw	1
+   861  0081  3EFF               	addlw	high(0FFFBh)
+   862  0082  00AD               	movwf	1+(_ADC_STUDY_VALUE)
+   863  0083  288B               	goto	l7824
+   864                           	line	59
+   865                           	
+   866  0084                     l1103:	
+   867                           	line	60
+   868                           	
+   869  0084                     l7822:	
+   870                           ;main.c: 59: else
+   871                           ;main.c: 60: ADC_STUDY_VALUE = ADC1_ADCOUT;
+   872  0084  0877               	movf	(_ADC1_ADCOUT+1),w
+   873  0085  01AD               	clrf	(_ADC_STUDY_VALUE+1)
+   874  0086  07AD               	addwf	(_ADC_STUDY_VALUE+1)
+   875  0087  0876               	movf	(_ADC1_ADCOUT),w
+   876  0088  01AC               	clrf	(_ADC_STUDY_VALUE)
+   877  0089  07AC               	addwf	(_ADC_STUDY_VALUE)
+   878                           
+   879  008A  288B               	goto	l7824
+   880                           	
+   881  008B                     l1104:	
+   882                           	line	62
+   883                           	
+   884  008B                     l7824:	
+   885                           ;main.c: 62: Write_EEPROM_u16(0x00,ADC_STUDY_VALUE);
+   886  008B  082D               	movf	(_ADC_STUDY_VALUE+1),w
+   887  008C  01A1               	clrf	(?_Write_EEPROM_u16+1)
+   888  008D  07A1               	addwf	(?_Write_EEPROM_u16+1)
+   889  008E  082C               	movf	(_ADC_STUDY_VALUE),w
+   890  008F  01A0               	clrf	(?_Write_EEPROM_u16)
+   891  0090  07A0               	addwf	(?_Write_EEPROM_u16)
+   892                           
+   893  0091  3000               	movlw	(0)
+   894  0092  21E6               	fcall	_Write_EEPROM_u16
+   895                           	line	63
+   896                           	
+   897  0093                     l7826:	
+   898                           ;main.c: 63: Delay_xms(500);
+   899  0093  30F4               	movlw	low(01F4h)
+   900  0094  00F4               	movwf	(?_Delay_xms)
+   901  0095  3001               	movlw	high(01F4h)
+   902  0096  00F5               	movwf	((?_Delay_xms))+1
+   903  0097  2163               	fcall	_Delay_xms
+   904                           	line	64
+   905                           	
+   906  0098                     l7828:	
+   907                           ;main.c: 64: PA6=0;
+   908  0098  1283               	bcf	status, 5	;RP0=0, select bank0
+   909  0099  1303               	bcf	status, 6	;RP1=0, select bank0
+   910  009A  1305               	bcf	(46/8),(46)&7
+   911  009B  289C               	goto	l7830
+   912                           	line	65
+   913                           	
+   914  009C                     l1102:	
+   915                           	line	66
+   916                           	
+   917  009C                     l7830:	
+   918                           ;main.c: 65: }
+   919                           ;main.c: 66: if(ADC6_INPUT < 512){
+   920  009C  3002               	movlw	high(0200h)
+   921  009D  1283               	bcf	status, 5	;RP0=0, select bank0
+   922  009E  1303               	bcf	status, 6	;RP1=0, select bank0
+   923  009F  022B               	subwf	(_ADC6_INPUT+1),w
+   924  00A0  3000               	movlw	low(0200h)
+   925  00A1  1903               	skipnz
+   926  00A2  022A               	subwf	(_ADC6_INPUT),w
+   927  00A3  1803               	skipnc
+   928  00A4  28A6               	goto	u2571
+   929  00A5  28A7               	goto	u2570
+   930  00A6                     u2571:
+   931  00A6  28A9               	goto	l7834
+   932  00A7                     u2570:
+   933                           	line	67
+   934                           	
+   935  00A7                     l7832:	
+   936                           ;main.c: 67: PC1 = 0;
+   937  00A7  1087               	bcf	(57/8),(57)&7
+   938                           	line	68
+   939                           ;main.c: 68: }else{
+   940  00A8  2825               	goto	l7784
+   941                           	
+   942  00A9                     l1105:	
+   943                           	line	69
+   944                           	
+   945  00A9                     l7834:	
+   946                           ;main.c: 69: if(ADC1_ADCOUT <= ADC_STUDY_VALUE){
+   947  00A9  0877               	movf	(_ADC1_ADCOUT+1),w
+   948  00AA  022D               	subwf	(_ADC_STUDY_VALUE+1),w
+   949  00AB  1D03               	skipz
+   950  00AC  28AF               	goto	u2585
+   951  00AD  0876               	movf	(_ADC1_ADCOUT),w
+   952  00AE  022C               	subwf	(_ADC_STUDY_VALUE),w
+   953  00AF                     u2585:
+   954  00AF  1C03               	skipc
+   955  00B0  28B2               	goto	u2581
+   956  00B1  28B3               	goto	u2580
+   957  00B2                     u2581:
+   958  00B2  28B5               	goto	l1107
+   959  00B3                     u2580:
+   960                           	line	70
+   961                           	
+   962  00B3                     l7836:	
+   963                           ;main.c: 70: PC1=1;
+   964  00B3  1487               	bsf	(57/8),(57)&7
+   965                           	line	71
+   966                           ;main.c: 71: }else
+   967  00B4  2825               	goto	l7784
+   968                           	
+   969  00B5                     l1107:	
+   970                           	line	72
+   971                           ;main.c: 72: PC1=0;
+   972  00B5  1087               	bcf	(57/8),(57)&7
+   973  00B6  2825               	goto	l7784
+   974                           	
+   975  00B7                     l1108:	
+   976  00B7  2825               	goto	l7784
+   977                           	line	73
+   978                           	
+   979  00B8                     l1106:	
+   980  00B8  2825               	goto	l7784
+   981                           	line	74
+   982                           	
+   983  00B9                     l1109:	
+   984                           	line	44
+   985  00B9  2825               	goto	l7784
+   986                           	
+   987  00BA                     l1110:	
+   988                           	line	75
+   989                           	
+   990  00BA                     l1111:	
+   991                           	global	start
+   992  00BA  2810               	ljmp	start
+   993                           	opt stack 0
+   994                           GLOBAL	__end_of_main
+   995  00BB                     	__end_of_main:
+   996 ;; =============== function _main ends ============
+   997                           
+   998                           	signat	_main,88
+   999                           	global	_LED_Study_End
+  1000                           psect	text528,local,class=CODE,delta=2
+  1001                           global __ptext528
+  1002  00BB                     __ptext528:
+  1003                           
+  1004 ;; *************** function _LED_Study_End *****************
+  1005 ;; Defined at:
+  1006 ;;		line 63 in file "myconfiguration.c"
+  1007 ;; Parameters:    Size  Location     Type
+  1008 ;;		None
+  1009 ;; Auto vars:     Size  Location     Type
+  1010 ;;		None
+  1011 ;; Return value:  Size  Location     Type
+  1012 ;;		None               void
+  1013 ;; Registers used:
+  1014 ;;		wreg, status,2, status,0, pclath, cstack
+  1015 ;; Tracked objects:
+  1016 ;;		On entry : 0/0
+  1017 ;;		On exit  : 0/0
+  1018 ;;		Unchanged: 0/0
+  1019 ;; Data sizes:     COMMON   BANK0   BANK1
+  1020 ;;      Params:         0       0       0
+  1021 ;;      Locals:         0       0       0
+  1022 ;;      Temps:          0       0       0
+  1023 ;;      Totals:         0       0       0
+  1024 ;;Total ram usage:        0 bytes
+  1025 ;; Hardware stack levels used:    1
+  1026 ;; Hardware stack levels required when called:    2
+  1027 ;; This function calls:
+  1028 ;;		_Delay_xms
+  1029 ;; This function is called by:
+  1030 ;;		_main
+  1031 ;; This function uses a non-reentrant model
+  1032 ;;
+  1033                           psect	text528
+  1034                           	file	"myconfiguration.c"
+  1035                           	line	63
+  1036                           	global	__size_of_LED_Study_End
+  1037  0031                     	__size_of_LED_Study_End	equ	__end_of_LED_Study_End-_LED_Study_End
+  1038                           	
+  1039  00BB                     _LED_Study_End:	
+  1040                           	opt	stack 5
+  1041                           ; Regs used in _LED_Study_End: [wreg+status,2+status,0+pclath+cstack]
+  1042                           	line	64
+  1043                           	
+  1044  00BB                     l7754:	
+  1045                           ;myconfiguration.c: 64: PA6 = 1;
+  1046  00BB  1283               	bcf	status, 5	;RP0=0, select bank0
+  1047  00BC  1303               	bcf	status, 6	;RP1=0, select bank0
+  1048  00BD  1705               	bsf	(46/8),(46)&7
+  1049                           	line	65
+  1050                           	
+  1051  00BE                     l7756:	
+  1052                           ;myconfiguration.c: 65: Delay_xms(40);
+  1053  00BE  3028               	movlw	low(028h)
+  1054  00BF  00F4               	movwf	(?_Delay_xms)
+  1055  00C0  3000               	movlw	high(028h)
+  1056  00C1  00F5               	movwf	((?_Delay_xms))+1
+  1057  00C2  2163               	fcall	_Delay_xms
+  1058                           	line	66
+  1059                           	
+  1060  00C3                     l7758:	
+  1061                           ;myconfiguration.c: 66: PA6 = 0;
+  1062  00C3  1283               	bcf	status, 5	;RP0=0, select bank0
+  1063  00C4  1303               	bcf	status, 6	;RP1=0, select bank0
+  1064  00C5  1305               	bcf	(46/8),(46)&7
+  1065                           	line	67
+  1066                           ;myconfiguration.c: 67: Delay_xms(40);
+  1067  00C6  3028               	movlw	low(028h)
+  1068  00C7  00F4               	movwf	(?_Delay_xms)
+  1069  00C8  3000               	movlw	high(028h)
+  1070  00C9  00F5               	movwf	((?_Delay_xms))+1
+  1071  00CA  2163               	fcall	_Delay_xms
+  1072                           	line	68
+  1073                           	
+  1074  00CB                     l7760:	
+  1075                           ;myconfiguration.c: 68: PA6 = 1;
+  1076  00CB  1283               	bcf	status, 5	;RP0=0, select bank0
+  1077  00CC  1303               	bcf	status, 6	;RP1=0, select bank0
+  1078  00CD  1705               	bsf	(46/8),(46)&7
+  1079                           	line	69
+  1080                           ;myconfiguration.c: 69: Delay_xms(40);
+  1081  00CE  3028               	movlw	low(028h)
+  1082  00CF  00F4               	movwf	(?_Delay_xms)
+  1083  00D0  3000               	movlw	high(028h)
+  1084  00D1  00F5               	movwf	((?_Delay_xms))+1
+  1085  00D2  2163               	fcall	_Delay_xms
+  1086                           	line	70
+  1087                           	
+  1088  00D3                     l7762:	
+  1089                           ;myconfiguration.c: 70: PA6 = 0;
+  1090  00D3  1283               	bcf	status, 5	;RP0=0, select bank0
+  1091  00D4  1303               	bcf	status, 6	;RP1=0, select bank0
+  1092  00D5  1305               	bcf	(46/8),(46)&7
+  1093                           	line	71
+  1094                           ;myconfiguration.c: 71: Delay_xms(40);
+  1095  00D6  3028               	movlw	low(028h)
+  1096  00D7  00F4               	movwf	(?_Delay_xms)
+  1097  00D8  3000               	movlw	high(028h)
+  1098  00D9  00F5               	movwf	((?_Delay_xms))+1
+  1099  00DA  2163               	fcall	_Delay_xms
+  1100                           	line	72
+  1101                           	
+  1102  00DB                     l7764:	
+  1103                           ;myconfiguration.c: 72: PA6 = 1;
+  1104  00DB  1283               	bcf	status, 5	;RP0=0, select bank0
+  1105  00DC  1303               	bcf	status, 6	;RP1=0, select bank0
+  1106  00DD  1705               	bsf	(46/8),(46)&7
+  1107                           	line	73
+  1108                           ;myconfiguration.c: 73: Delay_xms(40);
+  1109  00DE  3028               	movlw	low(028h)
+  1110  00DF  00F4               	movwf	(?_Delay_xms)
+  1111  00E0  3000               	movlw	high(028h)
+  1112  00E1  00F5               	movwf	((?_Delay_xms))+1
+  1113  00E2  2163               	fcall	_Delay_xms
+  1114                           	line	74
+  1115                           	
+  1116  00E3                     l7766:	
+  1117                           ;myconfiguration.c: 74: PA6 = 0;
+  1118  00E3  1283               	bcf	status, 5	;RP0=0, select bank0
+  1119  00E4  1303               	bcf	status, 6	;RP1=0, select bank0
+  1120  00E5  1305               	bcf	(46/8),(46)&7
+  1121                           	line	75
+  1122                           ;myconfiguration.c: 75: Delay_xms(40);
+  1123  00E6  3028               	movlw	low(028h)
+  1124  00E7  00F4               	movwf	(?_Delay_xms)
+  1125  00E8  3000               	movlw	high(028h)
+  1126  00E9  00F5               	movwf	((?_Delay_xms))+1
+  1127  00EA  2163               	fcall	_Delay_xms
+  1128                           	line	76
+  1129                           	
+  1130  00EB                     l2193:	
+  1131  00EB  0008               	return
+  1132                           	opt stack 0
+  1133                           GLOBAL	__end_of_LED_Study_End
+  1134  00EC                     	__end_of_LED_Study_End:
+  1135 ;; =============== function _LED_Study_End ends ============
+  1136                           
+  1137                           	signat	_LED_Study_End,88
+  1138                           	global	_ADC_Init
+  1139                           psect	text529,local,class=CODE,delta=2
+  1140                           global __ptext529
+  1141  01C9                     __ptext529:
+  1142                           
+  1143 ;; *************** function _ADC_Init *****************
+  1144 ;; Defined at:
+  1145 ;;		line 18 in file "myadc.c"
+  1146 ;; Parameters:    Size  Location     Type
+  1147 ;;		None
+  1148 ;; Auto vars:     Size  Location     Type
+  1149 ;;		None
+  1150 ;; Return value:  Size  Location     Type
+  1151 ;;		None               void
+  1152 ;; Registers used:
+  1153 ;;		wreg, status,2, status,0, pclath, cstack
+  1154 ;; Tracked objects:
+  1155 ;;		On entry : 0/0
+  1156 ;;		On exit  : 0/0
+  1157 ;;		Unchanged: 0/0
+  1158 ;; Data sizes:     COMMON   BANK0   BANK1
+  1159 ;;      Params:         0       0       0
+  1160 ;;      Locals:         0       0       0
+  1161 ;;      Temps:          0       0       0
+  1162 ;;      Totals:         0       0       0
+  1163 ;;Total ram usage:        0 bytes
+  1164 ;; Hardware stack levels used:    1
+  1165 ;; Hardware stack levels required when called:    2
+  1166 ;; This function calls:
+  1167 ;;		_Delay_xms
+  1168 ;; This function is called by:
+  1169 ;;		_main
+  1170 ;; This function uses a non-reentrant model
+  1171 ;;
+  1172                           psect	text529
+  1173                           	file	"myadc.c"
+  1174                           	line	18
+  1175                           	global	__size_of_ADC_Init
+  1176  001D                     	__size_of_ADC_Init	equ	__end_of_ADC_Init-_ADC_Init
+  1177                           	
+  1178  01C9                     _ADC_Init:	
+  1179                           	opt	stack 5
+  1180                           ; Regs used in _ADC_Init: [wreg+status,2+status,0+pclath+cstack]
+  1181                           	line	20
+  1182                           	
+  1183  01C9                     l7734:	
+  1184                           ;myadc.c: 20: TRISA1=1;
+  1185  01C9  1683               	bsf	status, 5	;RP0=1, select bank1
+  1186  01CA  1303               	bcf	status, 6	;RP1=0, select bank1
+  1187  01CB  1485               	bsf	(1065/8)^080h,(1065)&7
+  1188                           	line	21
+  1189                           ;myadc.c: 21: TRISC2=1;
+  1190  01CC  1507               	bsf	(1082/8)^080h,(1082)&7
+  1191                           	line	22
+  1192                           ;myadc.c: 22: ANSEL1=1;
+  1193  01CD  1491               	bsf	(1161/8)^080h,(1161)&7
+  1194                           	line	23
+  1195                           ;myadc.c: 23: ANSEL6=1;
+  1196  01CE  1711               	bsf	(1166/8)^080h,(1166)&7
+  1197                           	line	26
+  1198                           ;myadc.c: 26: DIVS=0;
+  1199  01CF  139F               	bcf	(1279/8)^080h,(1279)&7
+  1200                           	line	27
+  1201                           ;myadc.c: 27: ADCS0=0;ADCS1=0;ADCS2=0;
+  1202  01D0  121F               	bcf	(1276/8)^080h,(1276)&7
+  1203  01D1  129F               	bcf	(1277/8)^080h,(1277)&7
+  1204  01D2  131F               	bcf	(1278/8)^080h,(1278)&7
+  1205                           	line	29
+  1206                           	
+  1207  01D3                     l7736:	
+  1208                           ;myadc.c: 29: ADCON0=0B10000001;
+  1209  01D3  3081               	movlw	(081h)
+  1210  01D4  1283               	bcf	status, 5	;RP0=0, select bank0
+  1211  01D5  1303               	bcf	status, 6	;RP1=0, select bank0
+  1212  01D6  009F               	movwf	(31)	;volatile
+  1213                           	line	30
+  1214                           	
+  1215  01D7                     l7738:	
+  1216                           ;myadc.c: 30: VCFG0=0;
+  1217  01D7  129F               	bcf	(253/8),(253)&7
+  1218                           	line	31
+  1219                           	
+  1220  01D8                     l7740:	
+  1221                           ;myadc.c: 31: CHS0=1;CHS1=0;CHS2=0;
+  1222  01D8  151F               	bsf	(250/8),(250)&7
+  1223                           	
+  1224  01D9                     l7742:	
+  1225  01D9  119F               	bcf	(251/8),(251)&7
+  1226                           	
+  1227  01DA                     l7744:	
+  1228  01DA  121F               	bcf	(252/8),(252)&7
+  1229                           	line	32
+  1230                           	
+  1231  01DB                     l7746:	
+  1232                           ;myadc.c: 32: ADFM=1;
+  1233  01DB  179F               	bsf	(255/8),(255)&7
+  1234                           	line	33
+  1235                           	
+  1236  01DC                     l7748:	
+  1237                           ;myadc.c: 33: ADON=1;
+  1238  01DC  141F               	bsf	(248/8),(248)&7
+  1239                           	line	35
+  1240                           	
+  1241  01DD                     l7750:	
+  1242                           ;myadc.c: 35: Delay_xms(1);
+  1243  01DD  3001               	movlw	low(01h)
+  1244  01DE  00F4               	movwf	(?_Delay_xms)
+  1245  01DF  3000               	movlw	high(01h)
+  1246  01E0  00F5               	movwf	((?_Delay_xms))+1
+  1247  01E1  2163               	fcall	_Delay_xms
+  1248                           	line	37
+  1249                           	
+  1250  01E2                     l7752:	
+  1251                           ;myadc.c: 37: GO_DONE=1;
+  1252  01E2  1283               	bcf	status, 5	;RP0=0, select bank0
+  1253  01E3  1303               	bcf	status, 6	;RP1=0, select bank0
+  1254  01E4  149F               	bsf	(249/8),(249)&7
+  1255                           	line	38
+  1256                           	
+  1257  01E5                     l5414:	
+  1258  01E5  0008               	return
+  1259                           	opt stack 0
+  1260                           GLOBAL	__end_of_ADC_Init
+  1261  01E6                     	__end_of_ADC_Init:
+  1262 ;; =============== function _ADC_Init ends ============
+  1263                           
+  1264                           	signat	_ADC_Init,88
+  1265                           	global	_Write_EEPROM_u16
+  1266                           psect	text530,local,class=CODE,delta=2
+  1267                           global __ptext530
+  1268  01E6                     __ptext530:
+  1269                           
+  1270 ;; *************** function _Write_EEPROM_u16 *****************
+  1271 ;; Defined at:
+  1272 ;;		line 25 in file "MyEEProm.c"
+  1273 ;; Parameters:    Size  Location     Type
+  1274 ;;  EEAddress       1    wreg     unsigned char 
+  1275 ;;  EEDatas         2    0[BANK0 ] unsigned int 
+  1276 ;; Auto vars:     Size  Location     Type
+  1277 ;;  EEAddress       1    5[BANK0 ] unsigned char 
+  1278 ;;  DATA_L          1    4[BANK0 ] unsigned char 
+  1279 ;;  DATA_H          1    3[BANK0 ] unsigned char 
+  1280 ;; Return value:  Size  Location     Type
+  1281 ;;		None               void
+  1282 ;; Registers used:
+  1283 ;;		wreg, status,2, status,0, pclath, cstack
+  1284 ;; Tracked objects:
+  1285 ;;		On entry : 0/0
+  1286 ;;		On exit  : 0/0
+  1287 ;;		Unchanged: 0/0
+  1288 ;; Data sizes:     COMMON   BANK0   BANK1
+  1289 ;;      Params:         0       2       0
+  1290 ;;      Locals:         0       3       0
+  1291 ;;      Temps:          0       1       0
+  1292 ;;      Totals:         0       6       0
+  1293 ;;Total ram usage:        6 bytes
+  1294 ;; Hardware stack levels used:    1
+  1295 ;; Hardware stack levels required when called:    2
+  1296 ;; This function calls:
+  1297 ;;		_Write_EEPROM_u8
+  1298 ;; This function is called by:
+  1299 ;;		_main
+  1300 ;; This function uses a non-reentrant model
+  1301 ;;
+  1302                           psect	text530
+  1303                           	file	"MyEEProm.c"
+  1304                           	line	25
+  1305                           	global	__size_of_Write_EEPROM_u16
+  1306  001D                     	__size_of_Write_EEPROM_u16	equ	__end_of_Write_EEPROM_u16-_Write_EEPROM_u16
+  1307                           	
+  1308  01E6                     _Write_EEPROM_u16:	
+  1309                           	opt	stack 5
+  1310                           ; Regs used in _Write_EEPROM_u16: [wreg+status,2+status,0+pclath+cstack]
+  1311                           ;Write_EEPROM_u16@EEAddress stored from wreg
+  1312  01E6  1283               	bcf	status, 5	;RP0=0, select bank0
+  1313  01E7  1303               	bcf	status, 6	;RP1=0, select bank0
+  1314  01E8  00A5               	movwf	(Write_EEPROM_u16@EEAddress)
+  1315                           	line	26
+  1316                           	
+  1317  01E9                     l7724:	
+  1318                           ;MyEEProm.c: 26: unsigned char DATA_H=0;
+  1319  01E9  01A3               	clrf	(Write_EEPROM_u16@DATA_H)
+  1320                           	line	27
+  1321                           ;MyEEProm.c: 27: unsigned char DATA_L=0;
+  1322  01EA  01A4               	clrf	(Write_EEPROM_u16@DATA_L)
+  1323                           	line	29
+  1324                           	
+  1325  01EB                     l7726:	
+  1326                           ;MyEEProm.c: 29: DATA_H = (EEDatas>>8)&0xff;
+  1327  01EB  0821               	movf	(Write_EEPROM_u16@EEDatas+1),w
+  1328  01EC  00A2               	movwf	(??_Write_EEPROM_u16+0)+0
+  1329  01ED  0822               	movf	(??_Write_EEPROM_u16+0)+0,w
+  1330  01EE  00A3               	movwf	(Write_EEPROM_u16@DATA_H)
+  1331                           	line	30
+  1332                           	
+  1333  01EF                     l7728:	
+  1334                           ;MyEEProm.c: 30: DATA_L = EEDatas&0xff;
+  1335  01EF  0820               	movf	(Write_EEPROM_u16@EEDatas),w
+  1336  01F0  00A2               	movwf	(??_Write_EEPROM_u16+0)+0
+  1337  01F1  0822               	movf	(??_Write_EEPROM_u16+0)+0,w
+  1338  01F2  00A4               	movwf	(Write_EEPROM_u16@DATA_L)
+  1339                           	line	31
+  1340                           	
+  1341  01F3                     l7730:	
+  1342                           ;MyEEProm.c: 31: Write_EEPROM_u8(EEAddress,DATA_H);
+  1343  01F3  0823               	movf	(Write_EEPROM_u16@DATA_H),w
+  1344  01F4  00A2               	movwf	(??_Write_EEPROM_u16+0)+0
+  1345  01F5  0822               	movf	(??_Write_EEPROM_u16+0)+0,w
+  1346  01F6  00F4               	movwf	(?_Write_EEPROM_u8)
+  1347  01F7  0825               	movf	(Write_EEPROM_u16@EEAddress),w
+  1348  01F8  21A8               	fcall	_Write_EEPROM_u8
+  1349                           	line	32
+  1350                           	
+  1351  01F9                     l7732:	
+  1352                           ;MyEEProm.c: 32: Write_EEPROM_u8(EEAddress+1,DATA_L);
+  1353  01F9  1283               	bcf	status, 5	;RP0=0, select bank0
+  1354  01FA  1303               	bcf	status, 6	;RP1=0, select bank0
+  1355  01FB  0824               	movf	(Write_EEPROM_u16@DATA_L),w
+  1356  01FC  00A2               	movwf	(??_Write_EEPROM_u16+0)+0
+  1357  01FD  0822               	movf	(??_Write_EEPROM_u16+0)+0,w
+  1358  01FE  00F4               	movwf	(?_Write_EEPROM_u8)
+  1359  01FF  0825               	movf	(Write_EEPROM_u16@EEAddress),w
+  1360  0200  3E01               	addlw	01h
+  1361  0201  21A8               	fcall	_Write_EEPROM_u8
+  1362                           	line	34
+  1363                           	
+  1364  0202                     l3265:	
+  1365  0202  0008               	return
+  1366                           	opt stack 0
+  1367                           GLOBAL	__end_of_Write_EEPROM_u16
+  1368  0203                     	__end_of_Write_EEPROM_u16:
+  1369 ;; =============== function _Write_EEPROM_u16 ends ============
+  1370                           
+  1371                           	signat	_Write_EEPROM_u16,8312
+  1372                           	global	_Delay_xms
+  1373                           psect	text531,local,class=CODE,delta=2
+  1374                           global __ptext531
+  1375  0163                     __ptext531:
+  1376                           
+  1377 ;; *************** function _Delay_xms *****************
+  1378 ;; Defined at:
+  1379 ;;		line 46 in file "myconfiguration.c"
+  1380 ;; Parameters:    Size  Location     Type
+  1381 ;;  x               2    4[COMMON] unsigned int 
+  1382 ;; Auto vars:     Size  Location     Type
+  1383 ;;  i               2    2[BANK0 ] unsigned int 
+  1384 ;; Return value:  Size  Location     Type
+  1385 ;;		None               void
+  1386 ;; Registers used:
+  1387 ;;		wreg, status,2
+  1388 ;; Tracked objects:
+  1389 ;;		On entry : 0/0
+  1390 ;;		On exit  : 0/0
+  1391 ;;		Unchanged: 0/0
+  1392 ;; Data sizes:     COMMON   BANK0   BANK1
+  1393 ;;      Params:         2       0       0
+  1394 ;;      Locals:         0       2       0
+  1395 ;;      Temps:          0       2       0
+  1396 ;;      Totals:         2       4       0
+  1397 ;;Total ram usage:        6 bytes
+  1398 ;; Hardware stack levels used:    1
+  1399 ;; Hardware stack levels required when called:    1
+  1400 ;; This function calls:
+  1401 ;;		Nothing
+  1402 ;; This function is called by:
+  1403 ;;		_main
+  1404 ;;		_LED_Study_End
+  1405 ;;		_ADC_Init
+  1406 ;; This function uses a non-reentrant model
+  1407 ;;
+  1408                           psect	text531
+  1409                           	file	"myconfiguration.c"
+  1410                           	line	46
+  1411                           	global	__size_of_Delay_xms
+  1412  0023                     	__size_of_Delay_xms	equ	__end_of_Delay_xms-_Delay_xms
+  1413                           	
+  1414  0163                     _Delay_xms:	
+  1415                           	opt	stack 6
+  1416                           ; Regs used in _Delay_xms: [wreg+status,2]
+  1417                           	line	48
+  1418                           	
+  1419  0163                     l7718:	
+  1420                           ;myconfiguration.c: 47: unsigned int i;
+  1421                           ;myconfiguration.c: 48: for(i=0;i<x;i++){
+  1422  0163  1283               	bcf	status, 5	;RP0=0, select bank0
+  1423  0164  1303               	bcf	status, 6	;RP1=0, select bank0
+  1424  0165  01A2               	clrf	(Delay_xms@i)
+  1425  0166  01A3               	clrf	(Delay_xms@i+1)
+  1426  0167  297A               	goto	l2187
+  1427                           	
+  1428  0168                     l2188:	
+  1429                           	line	49
+  1430                           	
+  1431  0168                     l7720:	
+  1432                           ;myconfiguration.c: 49: _delay((unsigned long)((1)*(16000000/4000.0)));
+  1433                           	opt asmopt_off
+  1434  0168  3006               movlw	6
+  1435  0169  00A1               movwf	((??_Delay_xms+0)+0+1),f
+  1436  016A  3030               	movlw	48
+  1437  016B  00A0               movwf	((??_Delay_xms+0)+0),f
+  1438  016C                     u2597:
+  1439  016C  0BA0               	decfsz	((??_Delay_xms+0)+0),f
+  1440  016D  296C               	goto	u2597
+  1441  016E  0BA1               	decfsz	((??_Delay_xms+0)+0+1),f
+  1442  016F  296C               	goto	u2597
+  1443  0170  0064               	clrwdt
+  1444                           opt asmopt_on
+  1445                           
+  1446                           	line	50
+  1447                           	
+  1448  0171                     l7722:	
+  1449                           # 50 "myconfiguration.c"
+  1450  0171  0064               clrwdt ;#
+  1451                           psect	text531
+  1452                           	line	48
+  1453  0172  3001               	movlw	low(01h)
+  1454  0173  1283               	bcf	status, 5	;RP0=0, select bank0
+  1455  0174  1303               	bcf	status, 6	;RP1=0, select bank0
+  1456  0175  07A2               	addwf	(Delay_xms@i),f
+  1457  0176  1803               	skipnc
+  1458  0177  0AA3               	incf	(Delay_xms@i+1),f
+  1459  0178  3000               	movlw	high(01h)
+  1460  0179  07A3               	addwf	(Delay_xms@i+1),f
+  1461                           	
+  1462  017A                     l2187:	
+  1463  017A  0875               	movf	(Delay_xms@x+1),w
+  1464  017B  0223               	subwf	(Delay_xms@i+1),w
+  1465  017C  1D03               	skipz
+  1466  017D  2980               	goto	u2505
+  1467  017E  0874               	movf	(Delay_xms@x),w
+  1468  017F  0222               	subwf	(Delay_xms@i),w
+  1469  0180                     u2505:
+  1470  0180  1C03               	skipc
+  1471  0181  2983               	goto	u2501
+  1472  0182  2984               	goto	u2500
+  1473  0183                     u2501:
+  1474  0183  2968               	goto	l7720
+  1475  0184                     u2500:
+  1476  0184  2985               	goto	l2190
+  1477                           	
+  1478  0185                     l2189:	
+  1479                           	line	52
+  1480                           	
+  1481  0185                     l2190:	
+  1482  0185  0008               	return
+  1483                           	opt stack 0
+  1484                           GLOBAL	__end_of_Delay_xms
+  1485  0186                     	__end_of_Delay_xms:
+  1486 ;; =============== function _Delay_xms ends ============
+  1487                           
+  1488                           	signat	_Delay_xms,4216
+  1489                           	global	_ExchChannel
+  1490                           psect	text532,local,class=CODE,delta=2
+  1491                           global __ptext532
+  1492  013E                     __ptext532:
+  1493                           
+  1494 ;; *************** function _ExchChannel *****************
+  1495 ;; Defined at:
+  1496 ;;		line 70 in file "myadc.c"
+  1497 ;; Parameters:    Size  Location     Type
+  1498 ;;  ch_temp         1    wreg     unsigned char 
+  1499 ;; Auto vars:     Size  Location     Type
+  1500 ;;  ch_temp         1    0[BANK0 ] unsigned char 
+  1501 ;;  adc_ch_temp     1    1[BANK0 ] unsigned char 
+  1502 ;; Return value:  Size  Location     Type
+  1503 ;;		None               void
+  1504 ;; Registers used:
+  1505 ;;		wreg, status,2, status,0
+  1506 ;; Tracked objects:
+  1507 ;;		On entry : 0/0
+  1508 ;;		On exit  : 0/0
+  1509 ;;		Unchanged: 0/0
+  1510 ;; Data sizes:     COMMON   BANK0   BANK1
+  1511 ;;      Params:         0       0       0
+  1512 ;;      Locals:         0       2       0
+  1513 ;;      Temps:          2       0       0
+  1514 ;;      Totals:         2       2       0
+  1515 ;;Total ram usage:        4 bytes
+  1516 ;; Hardware stack levels used:    1
+  1517 ;; Hardware stack levels required when called:    1
+  1518 ;; This function calls:
+  1519 ;;		Nothing
+  1520 ;; This function is called by:
+  1521 ;;		_main
+  1522 ;; This function uses a non-reentrant model
+  1523 ;;
+  1524                           psect	text532
+  1525                           	file	"myadc.c"
+  1526                           	line	70
+  1527                           	global	__size_of_ExchChannel
+  1528  0025                     	__size_of_ExchChannel	equ	__end_of_ExchChannel-_ExchChannel
+  1529                           	
+  1530  013E                     _ExchChannel:	
+  1531                           	opt	stack 6
+  1532                           ; Regs used in _ExchChannel: [wreg+status,2+status,0]
+  1533                           ;ExchChannel@ch_temp stored from wreg
+  1534                           	line	73
+  1535  013E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1536  013F  1303               	bcf	status, 6	;RP1=0, select bank0
+  1537  0140  00A0               	movwf	(ExchChannel@ch_temp)
+  1538                           	
+  1539  0141                     l7710:	
+  1540                           ;myadc.c: 71: unsigned char adc_ch_temp;
+  1541                           ;myadc.c: 73: adc_ch_temp = ch_temp;
+  1542  0141  0820               	movf	(ExchChannel@ch_temp),w
+  1543  0142  00F4               	movwf	(??_ExchChannel+0)+0
+  1544  0143  0874               	movf	(??_ExchChannel+0)+0,w
+  1545  0144  00A1               	movwf	(ExchChannel@adc_ch_temp)
+  1546                           	line	74
+  1547                           	
+  1548  0145                     l7712:	
+  1549                           ;myadc.c: 74: adc_ch_temp = adc_ch_temp<<2;
+  1550  0145  0821               	movf	(ExchChannel@adc_ch_temp),w
+  1551  0146  00F4               	movwf	(??_ExchChannel+0)+0
+  1552  0147  3001               	movlw	(02h)-1
+  1553  0148                     u2495:
+  1554  0148  1003               	clrc
+  1555  0149  0DF4               	rlf	(??_ExchChannel+0)+0,f
+  1556  014A  3EFF               	addlw	-1
+  1557  014B  1D03               	skipz
+  1558  014C  2948               	goto	u2495
+  1559  014D  1003               	clrc
+  1560  014E  0D74               	rlf	(??_ExchChannel+0)+0,w
+  1561  014F  00F5               	movwf	(??_ExchChannel+1)+0
+  1562  0150  0875               	movf	(??_ExchChannel+1)+0,w
+  1563  0151  00A1               	movwf	(ExchChannel@adc_ch_temp)
+  1564                           	line	75
+  1565                           	
+  1566  0152                     l7714:	
+  1567                           ;myadc.c: 75: ADCON0 = (ADCON0&0xe3)|adc_ch_temp;
+  1568  0152  081F               	movf	(31),w
+  1569  0153  39E3               	andlw	0E3h
+  1570  0154  0421               	iorwf	(ExchChannel@adc_ch_temp),w
+  1571  0155  009F               	movwf	(31)	;volatile
+  1572                           	line	76
+  1573                           ;myadc.c: 76: _delay((unsigned long)((1)*(16000000/4000.0)));
+  1574                           	opt asmopt_off
+  1575  0156  3006               movlw	6
+  1576  0157  00F5               movwf	((??_ExchChannel+0)+0+1),f
+  1577  0158  3030               	movlw	48
+  1578  0159  00F4               movwf	((??_ExchChannel+0)+0),f
+  1579  015A                     u2607:
+  1580  015A  0BF4               	decfsz	((??_ExchChannel+0)+0),f
+  1581  015B  295A               	goto	u2607
+  1582  015C  0BF5               	decfsz	((??_ExchChannel+0)+0+1),f
+  1583  015D  295A               	goto	u2607
+  1584  015E  0064               	clrwdt
+  1585                           opt asmopt_on
+  1586                           
+  1587                           	line	77
+  1588                           	
+  1589  015F                     l7716:	
+  1590                           ;myadc.c: 77: GO_DONE=1;
+  1591  015F  1283               	bcf	status, 5	;RP0=0, select bank0
+  1592  0160  1303               	bcf	status, 6	;RP1=0, select bank0
+  1593  0161  149F               	bsf	(249/8),(249)&7
+  1594                           	line	78
+  1595                           	
+  1596  0162                     l5421:	
+  1597  0162  0008               	return
+  1598                           	opt stack 0
+  1599                           GLOBAL	__end_of_ExchChannel
+  1600  0163                     	__end_of_ExchChannel:
+  1601 ;; =============== function _ExchChannel ends ============
+  1602                           
+  1603                           	signat	_ExchChannel,4216
+  1604                           	global	_Read_EEPROM_u16
+  1605                           psect	text533,local,class=CODE,delta=2
+  1606                           global __ptext533
+  1607  00EC                     __ptext533:
+  1608                           
+  1609 ;; *************** function _Read_EEPROM_u16 *****************
+  1610 ;; Defined at:
+  1611 ;;		line 37 in file "MyEEProm.c"
+  1612 ;; Parameters:    Size  Location     Type
+  1613 ;;  EEAddress       1    wreg     unsigned char 
+  1614 ;; Auto vars:     Size  Location     Type
+  1615 ;;  EEAddress       1    6[BANK0 ] unsigned char 
+  1616 ;;  EepromData      2    7[BANK0 ] unsigned int 
+  1617 ;; Return value:  Size  Location     Type
+  1618 ;;                  2    2[BANK0 ] unsigned int 
+  1619 ;; Registers used:
+  1620 ;;		wreg, status,2, status,0, pclath, cstack
+  1621 ;; Tracked objects:
+  1622 ;;		On entry : 0/0
+  1623 ;;		On exit  : 0/0
+  1624 ;;		Unchanged: 0/0
+  1625 ;; Data sizes:     COMMON   BANK0   BANK1
+  1626 ;;      Params:         0       2       0
+  1627 ;;      Locals:         0       3       0
+  1628 ;;      Temps:          0       2       0
+  1629 ;;      Totals:         0       7       0
+  1630 ;;Total ram usage:        7 bytes
+  1631 ;; Hardware stack levels used:    1
+  1632 ;; Hardware stack levels required when called:    2
+  1633 ;; This function calls:
+  1634 ;;		_Read_EEPROM_u8
+  1635 ;; This function is called by:
+  1636 ;;		_main
+  1637 ;; This function uses a non-reentrant model
+  1638 ;;
+  1639                           psect	text533
+  1640                           	file	"MyEEProm.c"
+  1641                           	line	37
+  1642                           	global	__size_of_Read_EEPROM_u16
+  1643  0029                     	__size_of_Read_EEPROM_u16	equ	__end_of_Read_EEPROM_u16-_Read_EEPROM_u16
+  1644                           	
+  1645  00EC                     _Read_EEPROM_u16:	
+  1646                           	opt	stack 5
+  1647                           ; Regs used in _Read_EEPROM_u16: [wreg+status,2+status,0+pclath+cstack]
+  1648                           ;Read_EEPROM_u16@EEAddress stored from wreg
+  1649  00EC  1283               	bcf	status, 5	;RP0=0, select bank0
+  1650  00ED  1303               	bcf	status, 6	;RP1=0, select bank0
+  1651  00EE  00A6               	movwf	(Read_EEPROM_u16@EEAddress)
+  1652                           	line	38
+  1653                           	
+  1654  00EF                     l7698:	
+  1655                           ;MyEEProm.c: 38: unsigned int EepromData=0;
+  1656  00EF  01A7               	clrf	(Read_EEPROM_u16@EepromData)
+  1657  00F0  01A8               	clrf	(Read_EEPROM_u16@EepromData+1)
+  1658                           	line	40
+  1659                           	
+  1660  00F1                     l7700:	
+  1661                           ;MyEEProm.c: 40: EepromData = Read_EEPROM_u8(EEAddress);
+  1662  00F1  0826               	movf	(Read_EEPROM_u16@EEAddress),w
+  1663  00F2  2203               	fcall	_Read_EEPROM_u8
+  1664  00F3  1283               	bcf	status, 5	;RP0=0, select bank0
+  1665  00F4  1303               	bcf	status, 6	;RP1=0, select bank0
+  1666  00F5  00A4               	movwf	(??_Read_EEPROM_u16+0)+0
+  1667  00F6  01A5               	clrf	(??_Read_EEPROM_u16+0)+0+1
+  1668  00F7  0824               	movf	0+(??_Read_EEPROM_u16+0)+0,w
+  1669  00F8  00A7               	movwf	(Read_EEPROM_u16@EepromData)
+  1670  00F9  0825               	movf	1+(??_Read_EEPROM_u16+0)+0,w
+  1671  00FA  00A8               	movwf	(Read_EEPROM_u16@EepromData+1)
+  1672                           	line	41
+  1673                           	
+  1674  00FB                     l7702:	
+  1675                           ;MyEEProm.c: 41: EepromData = EepromData<<8;
+  1676  00FB  0827               	movf	(Read_EEPROM_u16@EepromData),w
+  1677  00FC  00A5               	movwf	(??_Read_EEPROM_u16+0)+0+1
+  1678  00FD  01A4               	clrf	(??_Read_EEPROM_u16+0)+0
+  1679  00FE  0824               	movf	0+(??_Read_EEPROM_u16+0)+0,w
+  1680  00FF  00A7               	movwf	(Read_EEPROM_u16@EepromData)
+  1681  0100  0825               	movf	1+(??_Read_EEPROM_u16+0)+0,w
+  1682  0101  00A8               	movwf	(Read_EEPROM_u16@EepromData+1)
+  1683                           	line	42
+  1684                           	
+  1685  0102                     l7704:	
+  1686                           ;MyEEProm.c: 42: EepromData |= Read_EEPROM_u8(EEAddress+1);
+  1687  0102  0826               	movf	(Read_EEPROM_u16@EEAddress),w
+  1688  0103  3E01               	addlw	01h
+  1689  0104  2203               	fcall	_Read_EEPROM_u8
+  1690  0105  1283               	bcf	status, 5	;RP0=0, select bank0
+  1691  0106  1303               	bcf	status, 6	;RP1=0, select bank0
+  1692  0107  00A4               	movwf	(??_Read_EEPROM_u16+0)+0
+  1693  0108  01A5               	clrf	(??_Read_EEPROM_u16+0)+0+1
+  1694  0109  0824               	movf	0+(??_Read_EEPROM_u16+0)+0,w
+  1695  010A  04A7               	iorwf	(Read_EEPROM_u16@EepromData),f
+  1696  010B  0825               	movf	1+(??_Read_EEPROM_u16+0)+0,w
+  1697  010C  04A8               	iorwf	(Read_EEPROM_u16@EepromData+1),f
+  1698                           	line	43
+  1699                           	
+  1700  010D                     l7706:	
+  1701                           ;MyEEProm.c: 43: return EepromData;
+  1702  010D  0828               	movf	(Read_EEPROM_u16@EepromData+1),w
+  1703  010E  01A3               	clrf	(?_Read_EEPROM_u16+1)
+  1704  010F  07A3               	addwf	(?_Read_EEPROM_u16+1)
+  1705  0110  0827               	movf	(Read_EEPROM_u16@EepromData),w
+  1706  0111  01A2               	clrf	(?_Read_EEPROM_u16)
+  1707  0112  07A2               	addwf	(?_Read_EEPROM_u16)
+  1708                           
+  1709  0113  2914               	goto	l3268
+  1710                           	
+  1711  0114                     l7708:	
+  1712                           	line	44
+  1713                           	
+  1714  0114                     l3268:	
+  1715  0114  0008               	return
+  1716                           	opt stack 0
+  1717                           GLOBAL	__end_of_Read_EEPROM_u16
+  1718  0115                     	__end_of_Read_EEPROM_u16:
+  1719 ;; =============== function _Read_EEPROM_u16 ends ============
+  1720                           
+  1721                           	signat	_Read_EEPROM_u16,4218
+  1722                           	global	_EEPROM_Init
+  1723                           psect	text534,local,class=CODE,delta=2
+  1724                           global __ptext534
+  1725  0219                     __ptext534:
+  1726                           
+  1727 ;; *************** function _EEPROM_Init *****************
+  1728 ;; Defined at:
+  1729 ;;		line 13 in file "MyEEProm.c"
+  1730 ;; Parameters:    Size  Location     Type
+  1731 ;;		None
+  1732 ;; Auto vars:     Size  Location     Type
+  1733 ;;		None
+  1734 ;; Return value:  Size  Location     Type
+  1735 ;;		None               void
+  1736 ;; Registers used:
+  1737 ;;		wreg, status,2, status,0, pclath, cstack
+  1738 ;; Tracked objects:
+  1739 ;;		On entry : 0/0
+  1740 ;;		On exit  : 0/0
+  1741 ;;		Unchanged: 0/0
+  1742 ;; Data sizes:     COMMON   BANK0   BANK1
+  1743 ;;      Params:         0       0       0
+  1744 ;;      Locals:         0       0       0
+  1745 ;;      Temps:          0       1       0
+  1746 ;;      Totals:         0       1       0
+  1747 ;;Total ram usage:        1 bytes
+  1748 ;; Hardware stack levels used:    1
+  1749 ;; Hardware stack levels required when called:    2
+  1750 ;; This function calls:
+  1751 ;;		_Write_EEPROM_u8
+  1752 ;; This function is called by:
+  1753 ;;		_main
+  1754 ;; This function uses a non-reentrant model
+  1755 ;;
+  1756                           psect	text534
+  1757                           	file	"MyEEProm.c"
+  1758                           	line	13
+  1759                           	global	__size_of_EEPROM_Init
+  1760  0011                     	__size_of_EEPROM_Init	equ	__end_of_EEPROM_Init-_EEPROM_Init
+  1761                           	
+  1762  0219                     _EEPROM_Init:	
+  1763                           	opt	stack 5
+  1764                           ; Regs used in _EEPROM_Init: [wreg+status,2+status,0+pclath+cstack]
+  1765                           	line	14
+  1766                           	
+  1767  0219                     l7696:	
+  1768                           ;MyEEProm.c: 14: Write_EEPROM_u8(0xFF,0xAA);
+  1769  0219  30AA               	movlw	(0AAh)
+  1770  021A  1283               	bcf	status, 5	;RP0=0, select bank0
+  1771  021B  1303               	bcf	status, 6	;RP1=0, select bank0
+  1772  021C  00A0               	movwf	(??_EEPROM_Init+0)+0
+  1773  021D  0820               	movf	(??_EEPROM_Init+0)+0,w
+  1774  021E  00F4               	movwf	(?_Write_EEPROM_u8)
+  1775  021F  30FF               	movlw	(0FFh)
+  1776  0220  21A8               	fcall	_Write_EEPROM_u8
+  1777                           	line	15
+  1778                           ;MyEEProm.c: 15: Write_EEPROM_u8(0xFF,0xAA);
+  1779  0221  30AA               	movlw	(0AAh)
+  1780  0222  1283               	bcf	status, 5	;RP0=0, select bank0
+  1781  0223  1303               	bcf	status, 6	;RP1=0, select bank0
+  1782  0224  00A0               	movwf	(??_EEPROM_Init+0)+0
+  1783  0225  0820               	movf	(??_EEPROM_Init+0)+0,w
+  1784  0226  00F4               	movwf	(?_Write_EEPROM_u8)
+  1785  0227  30FF               	movlw	(0FFh)
+  1786  0228  21A8               	fcall	_Write_EEPROM_u8
+  1787                           	line	16
+  1788                           	
+  1789  0229                     l3262:	
+  1790  0229  0008               	return
+  1791                           	opt stack 0
+  1792                           GLOBAL	__end_of_EEPROM_Init
+  1793  022A                     	__end_of_EEPROM_Init:
+  1794 ;; =============== function _EEPROM_Init ends ============
+  1795                           
+  1796                           	signat	_EEPROM_Init,88
+  1797                           	global	_Read_EEPROM_u8
+  1798                           psect	text535,local,class=CODE,delta=2
+  1799                           global __ptext535
+  1800  0203                     __ptext535:
+  1801                           
+  1802 ;; *************** function _Read_EEPROM_u8 *****************
+  1803 ;; Defined at:
+  1804 ;;		line 62 in file "MyEEProm.c"
+  1805 ;; Parameters:    Size  Location     Type
+  1806 ;;  EEAddress       1    wreg     unsigned char 
+  1807 ;; Auto vars:     Size  Location     Type
+  1808 ;;  EEAddress       1    0[BANK0 ] unsigned char 
+  1809 ;;  ReEepromData    1    1[BANK0 ] unsigned char 
+  1810 ;; Return value:  Size  Location     Type
+  1811 ;;                  1    wreg      unsigned char 
+  1812 ;; Registers used:
+  1813 ;;		wreg
+  1814 ;; Tracked objects:
+  1815 ;;		On entry : 0/0
+  1816 ;;		On exit  : 0/0
+  1817 ;;		Unchanged: 0/0
+  1818 ;; Data sizes:     COMMON   BANK0   BANK1
+  1819 ;;      Params:         0       0       0
+  1820 ;;      Locals:         0       2       0
+  1821 ;;      Temps:          1       0       0
+  1822 ;;      Totals:         1       2       0
+  1823 ;;Total ram usage:        3 bytes
+  1824 ;; Hardware stack levels used:    1
+  1825 ;; Hardware stack levels required when called:    1
+  1826 ;; This function calls:
+  1827 ;;		Nothing
+  1828 ;; This function is called by:
+  1829 ;;		_Read_EEPROM_u16
+  1830 ;; This function uses a non-reentrant model
+  1831 ;;
+  1832                           psect	text535
+  1833                           	file	"MyEEProm.c"
+  1834                           	line	62
+  1835                           	global	__size_of_Read_EEPROM_u8
+  1836  0016                     	__size_of_Read_EEPROM_u8	equ	__end_of_Read_EEPROM_u8-_Read_EEPROM_u8
+  1837                           	
+  1838  0203                     _Read_EEPROM_u8:	
+  1839                           	opt	stack 5
+  1840                           ; Regs used in _Read_EEPROM_u8: [wreg]
+  1841                           ;Read_EEPROM_u8@EEAddress stored from wreg
+  1842                           	line	65
+  1843  0203  1283               	bcf	status, 5	;RP0=0, select bank0
+  1844  0204  1303               	bcf	status, 6	;RP1=0, select bank0
+  1845  0205  00A0               	movwf	(Read_EEPROM_u8@EEAddress)
+  1846                           	
+  1847  0206                     l7688:	
+  1848                           ;MyEEProm.c: 63: unsigned char ReEepromData;
+  1849                           ;MyEEProm.c: 65: EEADR = EEAddress;
+  1850  0206  0820               	movf	(Read_EEPROM_u8@EEAddress),w
+  1851  0207  1683               	bsf	status, 5	;RP0=1, select bank1
+  1852  0208  1303               	bcf	status, 6	;RP1=0, select bank1
+  1853  0209  009B               	movwf	(155)^080h	;volatile
+  1854                           	line	66
+  1855                           	
+  1856  020A                     l7690:	
+  1857                           ;MyEEProm.c: 66: RD = 1;
+  1858  020A  141C               	bsf	(1248/8)^080h,(1248)&7
+  1859                           	line	67
+  1860                           ;MyEEProm.c: 67: ReEepromData = EEDAT;
+  1861  020B  081A               	movf	(154)^080h,w	;volatile
+  1862  020C  00F4               	movwf	(??_Read_EEPROM_u8+0)+0
+  1863  020D  0874               	movf	(??_Read_EEPROM_u8+0)+0,w
+  1864  020E  1283               	bcf	status, 5	;RP0=0, select bank0
+  1865  020F  1303               	bcf	status, 6	;RP1=0, select bank0
+  1866  0210  00A1               	movwf	(Read_EEPROM_u8@ReEepromData)
+  1867                           	line	68
+  1868                           	
+  1869  0211                     l7692:	
+  1870                           ;MyEEProm.c: 68: RD = 0;
+  1871  0211  1683               	bsf	status, 5	;RP0=1, select bank1
+  1872  0212  1303               	bcf	status, 6	;RP1=0, select bank1
+  1873  0213  101C               	bcf	(1248/8)^080h,(1248)&7
+  1874                           	line	69
+  1875                           ;MyEEProm.c: 69: return ReEepromData;
+  1876  0214  1283               	bcf	status, 5	;RP0=0, select bank0
+  1877  0215  1303               	bcf	status, 6	;RP1=0, select bank0
+  1878  0216  0821               	movf	(Read_EEPROM_u8@ReEepromData),w
+  1879  0217  2A18               	goto	l3280
+  1880                           	
+  1881  0218                     l7694:	
+  1882                           	line	70
+  1883                           	
+  1884  0218                     l3280:	
+  1885  0218  0008               	return
+  1886                           	opt stack 0
+  1887                           GLOBAL	__end_of_Read_EEPROM_u8
+  1888  0219                     	__end_of_Read_EEPROM_u8:
+  1889 ;; =============== function _Read_EEPROM_u8 ends ============
+  1890                           
+  1891                           	signat	_Read_EEPROM_u8,4217
+  1892                           	global	_Write_EEPROM_u8
+  1893                           psect	text536,local,class=CODE,delta=2
+  1894                           global __ptext536
+  1895  01A8                     __ptext536:
+  1896                           
+  1897 ;; *************** function _Write_EEPROM_u8 *****************
+  1898 ;; Defined at:
+  1899 ;;		line 47 in file "MyEEProm.c"
+  1900 ;; Parameters:    Size  Location     Type
+  1901 ;;  EEAddress       1    wreg     unsigned char 
+  1902 ;;  EEDatas         1    4[COMMON] unsigned char 
+  1903 ;; Auto vars:     Size  Location     Type
+  1904 ;;  EEAddress       1    5[COMMON] unsigned char 
+  1905 ;; Return value:  Size  Location     Type
+  1906 ;;		None               void
+  1907 ;; Registers used:
+  1908 ;;		wreg
+  1909 ;; Tracked objects:
+  1910 ;;		On entry : 0/0
+  1911 ;;		On exit  : 0/0
+  1912 ;;		Unchanged: 0/0
+  1913 ;; Data sizes:     COMMON   BANK0   BANK1
+  1914 ;;      Params:         1       0       0
+  1915 ;;      Locals:         1       0       0
+  1916 ;;      Temps:          0       0       0
+  1917 ;;      Totals:         2       0       0
+  1918 ;;Total ram usage:        2 bytes
+  1919 ;; Hardware stack levels used:    1
+  1920 ;; Hardware stack levels required when called:    1
+  1921 ;; This function calls:
+  1922 ;;		Nothing
+  1923 ;; This function is called by:
+  1924 ;;		_EEPROM_Init
+  1925 ;;		_Write_EEPROM_u16
+  1926 ;; This function uses a non-reentrant model
+  1927 ;;
+  1928                           psect	text536
+  1929                           	file	"MyEEProm.c"
+  1930                           	line	47
+  1931                           	global	__size_of_Write_EEPROM_u8
+  1932  0021                     	__size_of_Write_EEPROM_u8	equ	__end_of_Write_EEPROM_u8-_Write_EEPROM_u8
+  1933                           	
+  1934  01A8                     _Write_EEPROM_u8:	
+  1935                           	opt	stack 5
+  1936                           ; Regs used in _Write_EEPROM_u8: [wreg]
+  1937                           ;Write_EEPROM_u8@EEAddress stored from wreg
+  1938  01A8  00F5               	movwf	(Write_EEPROM_u8@EEAddress)
+  1939                           	line	48
+  1940                           	
+  1941  01A9                     l7518:	
+  1942                           ;MyEEProm.c: 48: GIE = 0;
+  1943  01A9  138B               	bcf	(95/8),(95)&7
+  1944                           	line	49
+  1945                           ;MyEEProm.c: 49: while(GIE) asm("clrwdt");
+  1946  01AA  29AC               	goto	l3271
+  1947                           	
+  1948  01AB                     l3272:	
+  1949                           # 49 "MyEEProm.c"
+  1950  01AB  0064               clrwdt ;#
+  1951                           psect	text536
+  1952                           	
+  1953  01AC                     l3271:	
+  1954  01AC  1B8B               	btfsc	(95/8),(95)&7
+  1955  01AD  29AF               	goto	u2361
+  1956  01AE  29B0               	goto	u2360
+  1957  01AF                     u2361:
+  1958  01AF  29AB               	goto	l3272
+  1959  01B0                     u2360:
+  1960  01B0  29B1               	goto	l7520
+  1961                           	
+  1962  01B1                     l3273:	
+  1963                           	line	50
+  1964                           	
+  1965  01B1                     l7520:	
+  1966                           ;MyEEProm.c: 50: EEADR = EEAddress;
+  1967  01B1  0875               	movf	(Write_EEPROM_u8@EEAddress),w
+  1968  01B2  1683               	bsf	status, 5	;RP0=1, select bank1
+  1969  01B3  1303               	bcf	status, 6	;RP1=0, select bank1
+  1970  01B4  009B               	movwf	(155)^080h	;volatile
+  1971                           	line	51
+  1972                           ;MyEEProm.c: 51: EEDAT = EEDatas;
+  1973  01B5  0874               	movf	(Write_EEPROM_u8@EEDatas),w
+  1974  01B6  009A               	movwf	(154)^080h	;volatile
+  1975                           	line	52
+  1976                           	
+  1977  01B7                     l7522:	
+  1978                           ;MyEEProm.c: 52: EEIF = 0;
+  1979  01B7  1283               	bcf	status, 5	;RP0=0, select bank0
+  1980  01B8  1303               	bcf	status, 6	;RP1=0, select bank0
+  1981  01B9  138C               	bcf	(103/8),(103)&7
+  1982                           	line	53
+  1983                           ;MyEEProm.c: 53: EECON1 = 0x34;
+  1984  01BA  3034               	movlw	(034h)
+  1985  01BB  1683               	bsf	status, 5	;RP0=1, select bank1
+  1986  01BC  1303               	bcf	status, 6	;RP1=0, select bank1
+  1987  01BD  009C               	movwf	(156)^080h	;volatile
+  1988                           	line	54
+  1989                           	
+  1990  01BE                     l7524:	
+  1991                           ;MyEEProm.c: 54: WR = 1;
+  1992  01BE  141D               	bsf	(1256/8)^080h,(1256)&7
+  1993                           	line	55
+  1994                           ;MyEEProm.c: 55: while(WR) asm("clrwdt");
+  1995  01BF  29C1               	goto	l3274
+  1996                           	
+  1997  01C0                     l3275:	
+  1998                           # 55 "MyEEProm.c"
+  1999  01C0  0064               clrwdt ;#
+  2000                           psect	text536
+  2001                           	
+  2002  01C1                     l3274:	
+  2003  01C1  1683               	bsf	status, 5	;RP0=1, select bank1
+  2004  01C2  1303               	bcf	status, 6	;RP1=0, select bank1
+  2005  01C3  181D               	btfsc	(1256/8)^080h,(1256)&7
+  2006  01C4  29C6               	goto	u2371
+  2007  01C5  29C7               	goto	u2370
+  2008  01C6                     u2371:
+  2009  01C6  29C0               	goto	l3275
+  2010  01C7                     u2370:
+  2011                           	
+  2012  01C7                     l3276:	
+  2013                           	line	57
+  2014                           ;MyEEProm.c: 57: GIE = 1;
+  2015  01C7  178B               	bsf	(95/8),(95)&7
+  2016                           	line	58
+  2017                           	
+  2018  01C8                     l3277:	
+  2019  01C8  0008               	return
+  2020                           	opt stack 0
+  2021                           GLOBAL	__end_of_Write_EEPROM_u8
+  2022  01C9                     	__end_of_Write_EEPROM_u8:
+  2023 ;; =============== function _Write_EEPROM_u8 ends ============
+  2024                           
+  2025                           	signat	_Write_EEPROM_u8,8312
+  2026                           	global	_isKeyPressed
+  2027                           psect	text537,local,class=CODE,delta=2
+  2028                           global __ptext537
+  2029  023F                     __ptext537:
+  2030                           
+  2031 ;; *************** function _isKeyPressed *****************
+  2032 ;; Defined at:
+  2033 ;;		line 18 in file "MyKey.c"
+  2034 ;; Parameters:    Size  Location     Type
+  2035 ;;		None
+  2036 ;; Auto vars:     Size  Location     Type
+  2037 ;;		None
+  2038 ;; Return value:  Size  Location     Type
+  2039 ;;                  1    wreg      unsigned char 
+  2040 ;; Registers used:
+  2041 ;;		wreg, status,2, status,0
+  2042 ;; Tracked objects:
+  2043 ;;		On entry : 0/0
+  2044 ;;		On exit  : 0/0
+  2045 ;;		Unchanged: 0/0
+  2046 ;; Data sizes:     COMMON   BANK0   BANK1
+  2047 ;;      Params:         0       0       0
+  2048 ;;      Locals:         0       0       0
+  2049 ;;      Temps:          0       0       0
+  2050 ;;      Totals:         0       0       0
+  2051 ;;Total ram usage:        0 bytes
+  2052 ;; Hardware stack levels used:    1
+  2053 ;; Hardware stack levels required when called:    1
+  2054 ;; This function calls:
+  2055 ;;		Nothing
+  2056 ;; This function is called by:
+  2057 ;;		_main
+  2058 ;; This function uses a non-reentrant model
+  2059 ;;
+  2060                           psect	text537
+  2061                           	file	"MyKey.c"
+  2062                           	line	18
+  2063                           	global	__size_of_isKeyPressed
+  2064  000A                     	__size_of_isKeyPressed	equ	__end_of_isKeyPressed-_isKeyPressed
+  2065                           	
+  2066  023F                     _isKeyPressed:	
+  2067                           	opt	stack 6
+  2068                           ; Regs used in _isKeyPressed: [wreg+status,2+status,0]
+  2069                           	line	19
+  2070                           	
+  2071  023F                     l7514:	
+  2072                           ;MyKey.c: 19: return PC3 ? 0:1;
+  2073  023F  1003               	clrc
+  2074  0240  1283               	bcf	status, 5	;RP0=0, select bank0
+  2075  0241  1303               	bcf	status, 6	;RP1=0, select bank0
+  2076  0242  1D87               	btfss	(59/8),(59)&7
+  2077  0243  1403               	setc
+  2078  0244  3000               	movlw	0
+  2079  0245  1803               	skipnc
+  2080  0246  3001               	movlw	1
+  2081                           
+  2082  0247  2A48               	goto	l4345
+  2083                           	
+  2084  0248                     l7516:	
+  2085                           	line	20
+  2086                           	
+  2087  0248                     l4345:	
+  2088  0248  0008               	return
+  2089                           	opt stack 0
+  2090                           GLOBAL	__end_of_isKeyPressed
+  2091  0249                     	__end_of_isKeyPressed:
+  2092 ;; =============== function _isKeyPressed ends ============
+  2093                           
+  2094                           	signat	_isKeyPressed,89
+  2095                           	global	_GetADCValue
+  2096                           psect	text538,local,class=CODE,delta=2
+  2097                           global __ptext538
+  2098  0115                     __ptext538:
+  2099                           
+  2100 ;; *************** function _GetADCValue *****************
+  2101 ;; Defined at:
+  2102 ;;		line 48 in file "myadc.c"
+  2103 ;; Parameters:    Size  Location     Type
+  2104 ;;		None
+  2105 ;; Auto vars:     Size  Location     Type
+  2106 ;;  ADC_num         2    2[BANK0 ] unsigned short 
+  2107 ;; Return value:  Size  Location     Type
+  2108 ;;                  2    4[COMMON] unsigned short 
+  2109 ;; Registers used:
+  2110 ;;		wreg, status,2, status,0
+  2111 ;; Tracked objects:
+  2112 ;;		On entry : 0/0
+  2113 ;;		On exit  : 0/0
+  2114 ;;		Unchanged: 0/0
+  2115 ;; Data sizes:     COMMON   BANK0   BANK1
+  2116 ;;      Params:         2       0       0
+  2117 ;;      Locals:         0       2       0
+  2118 ;;      Temps:          0       2       0
+  2119 ;;      Totals:         2       4       0
+  2120 ;;Total ram usage:        6 bytes
+  2121 ;; Hardware stack levels used:    1
+  2122 ;; Hardware stack levels required when called:    1
+  2123 ;; This function calls:
+  2124 ;;		Nothing
+  2125 ;; This function is called by:
+  2126 ;;		_main
+  2127 ;; This function uses a non-reentrant model
+  2128 ;;
+  2129                           psect	text538
+  2130                           	file	"myadc.c"
+  2131                           	line	48
+  2132                           	global	__size_of_GetADCValue
+  2133  0029                     	__size_of_GetADCValue	equ	__end_of_GetADCValue-_GetADCValue
+  2134                           	
+  2135  0115                     _GetADCValue:	
+  2136                           	opt	stack 6
+  2137                           ; Regs used in _GetADCValue: [wreg+status,2+status,0]
+  2138                           	line	49
+  2139                           	
+  2140  0115                     l7676:	
+  2141                           ;myadc.c: 49: unsigned short int ADC_num=0;
+  2142  0115  1283               	bcf	status, 5	;RP0=0, select bank0
+  2143  0116  1303               	bcf	status, 6	;RP1=0, select bank0
+  2144  0117  01A2               	clrf	(GetADCValue@ADC_num)
+  2145  0118  01A3               	clrf	(GetADCValue@ADC_num+1)
+  2146                           	line	51
+  2147                           	
+  2148  0119                     l7678:	
+  2149                           ;myadc.c: 51: if(GO_DONE==0){
+  2150  0119  189F               	btfsc	(249/8),(249)&7
+  2151  011A  291C               	goto	u2481
+  2152  011B  291D               	goto	u2480
+  2153  011C                     u2481:
+  2154  011C  2936               	goto	l7684
+  2155  011D                     u2480:
+  2156                           	line	52
+  2157                           	
+  2158  011D                     l7680:	
+  2159                           ;myadc.c: 52: ADC_num=ADRESH;
+  2160  011D  081E               	movf	(30),w	;volatile
+  2161  011E  00A0               	movwf	(??_GetADCValue+0)+0
+  2162  011F  01A1               	clrf	(??_GetADCValue+0)+0+1
+  2163  0120  0820               	movf	0+(??_GetADCValue+0)+0,w
+  2164  0121  00A2               	movwf	(GetADCValue@ADC_num)
+  2165  0122  0821               	movf	1+(??_GetADCValue+0)+0,w
+  2166  0123  00A3               	movwf	(GetADCValue@ADC_num+1)
+  2167                           	line	53
+  2168                           ;myadc.c: 53: ADC_num=ADC_num<<8;
+  2169  0124  0822               	movf	(GetADCValue@ADC_num),w
+  2170  0125  00A1               	movwf	(??_GetADCValue+0)+0+1
+  2171  0126  01A0               	clrf	(??_GetADCValue+0)+0
+  2172  0127  0820               	movf	0+(??_GetADCValue+0)+0,w
+  2173  0128  00A2               	movwf	(GetADCValue@ADC_num)
+  2174  0129  0821               	movf	1+(??_GetADCValue+0)+0,w
+  2175  012A  00A3               	movwf	(GetADCValue@ADC_num+1)
+  2176                           	line	54
+  2177                           ;myadc.c: 54: ADC_num=ADC_num|ADRESL;
+  2178  012B  0822               	movf	(GetADCValue@ADC_num),w
+  2179  012C  1683               	bsf	status, 5	;RP0=1, select bank1
+  2180  012D  1303               	bcf	status, 6	;RP1=0, select bank1
+  2181  012E  041E               	iorwf	(158)^080h,w	;volatile
+  2182  012F  1283               	bcf	status, 5	;RP0=0, select bank0
+  2183  0130  1303               	bcf	status, 6	;RP1=0, select bank0
+  2184  0131  00A2               	movwf	(GetADCValue@ADC_num)
+  2185  0132  0823               	movf	(GetADCValue@ADC_num+1),w
+  2186  0133  00A3               	movwf	1+(GetADCValue@ADC_num)
+  2187                           	line	55
+  2188                           	
+  2189  0134                     l7682:	
+  2190                           ;myadc.c: 55: GO_DONE=1;
+  2191  0134  149F               	bsf	(249/8),(249)&7
+  2192  0135  2936               	goto	l7684
+  2193                           	line	56
+  2194                           	
+  2195  0136                     l5417:	
+  2196                           	line	57
+  2197                           	
+  2198  0136                     l7684:	
+  2199                           ;myadc.c: 56: }
+  2200                           ;myadc.c: 57: return ADC_num;
+  2201  0136  0823               	movf	(GetADCValue@ADC_num+1),w
+  2202  0137  01F5               	clrf	(?_GetADCValue+1)
+  2203  0138  07F5               	addwf	(?_GetADCValue+1)
+  2204  0139  0822               	movf	(GetADCValue@ADC_num),w
+  2205  013A  01F4               	clrf	(?_GetADCValue)
+  2206  013B  07F4               	addwf	(?_GetADCValue)
+  2207                           
+  2208  013C  293D               	goto	l5418
+  2209                           	
+  2210  013D                     l7686:	
+  2211                           	line	58
+  2212                           	
+  2213  013D                     l5418:	
+  2214  013D  0008               	return
+  2215                           	opt stack 0
+  2216                           GLOBAL	__end_of_GetADCValue
+  2217  013E                     	__end_of_GetADCValue:
+  2218 ;; =============== function _GetADCValue ends ============
+  2219                           
+  2220                           	signat	_GetADCValue,90
+  2221                           	global	_GPIO_Init
+  2222                           psect	text539,local,class=CODE,delta=2
+  2223                           global __ptext539
+  2224  0186                     __ptext539:
+  2225                           
+  2226 ;; *************** function _GPIO_Init *****************
+  2227 ;; Defined at:
+  2228 ;;		line 22 in file "myconfiguration.c"
+  2229 ;; Parameters:    Size  Location     Type
+  2230 ;;		None
+  2231 ;; Auto vars:     Size  Location     Type
+  2232 ;;		None
+  2233 ;; Return value:  Size  Location     Type
+  2234 ;;		None               void
+  2235 ;; Registers used:
+  2236 ;;		None
+  2237 ;; Tracked objects:
+  2238 ;;		On entry : 0/0
+  2239 ;;		On exit  : 0/0
+  2240 ;;		Unchanged: 0/0
+  2241 ;; Data sizes:     COMMON   BANK0   BANK1
+  2242 ;;      Params:         0       0       0
+  2243 ;;      Locals:         0       0       0
+  2244 ;;      Temps:          0       0       0
+  2245 ;;      Totals:         0       0       0
+  2246 ;;Total ram usage:        0 bytes
+  2247 ;; Hardware stack levels used:    1
+  2248 ;; Hardware stack levels required when called:    1
+  2249 ;; This function calls:
+  2250 ;;		Nothing
+  2251 ;; This function is called by:
+  2252 ;;		_main
+  2253 ;; This function uses a non-reentrant model
+  2254 ;;
+  2255                           psect	text539
+  2256                           	file	"myconfiguration.c"
+  2257                           	line	22
+  2258                           	global	__size_of_GPIO_Init
+  2259  0022                     	__size_of_GPIO_Init	equ	__end_of_GPIO_Init-_GPIO_Init
+  2260                           	
+  2261  0186                     _GPIO_Init:	
+  2262                           	opt	stack 6
+  2263                           ; Regs used in _GPIO_Init: []
+  2264                           	line	24
+  2265                           	
+  2266  0186                     l7500:	
+  2267                           ;myconfiguration.c: 24: TRISA0=0;
+  2268  0186  1683               	bsf	status, 5	;RP0=1, select bank1
+  2269  0187  1303               	bcf	status, 6	;RP1=0, select bank1
+  2270  0188  1005               	bcf	(1064/8)^080h,(1064)&7
+  2271                           	line	25
+  2272                           ;myconfiguration.c: 25: TRISA1=0;
+  2273  0189  1085               	bcf	(1065/8)^080h,(1065)&7
+  2274                           	line	26
+  2275                           ;myconfiguration.c: 26: TRISA6=0;
+  2276  018A  1305               	bcf	(1070/8)^080h,(1070)&7
+  2277                           	line	28
+  2278                           ;myconfiguration.c: 28: TRISC1=0;
+  2279  018B  1087               	bcf	(1081/8)^080h,(1081)&7
+  2280                           	line	29
+  2281                           ;myconfiguration.c: 29: TRISC2=0;
+  2282  018C  1107               	bcf	(1082/8)^080h,(1082)&7
+  2283                           	line	30
+  2284                           ;myconfiguration.c: 30: TRISC3=1;
+  2285  018D  1587               	bsf	(1083/8)^080h,(1083)&7
+  2286                           	line	32
+  2287                           ;myconfiguration.c: 32: CM0=1;CM1=1;CM2=1;
+  2288  018E  1283               	bcf	status, 5	;RP0=0, select bank0
+  2289  018F  1303               	bcf	status, 6	;RP1=0, select bank0
+  2290  0190  1419               	bsf	(200/8),(200)&7
+  2291  0191  1499               	bsf	(201/8),(201)&7
+  2292  0192  1519               	bsf	(202/8),(202)&7
+  2293                           	line	36
+  2294                           ;myconfiguration.c: 36: ANSEL0=0;ANSEL1=0;ANSEL2=0;ANSEL3=0;ANSEL4=0;ANSEL5=0;ANSEL6=0;A
+                                 NSEL7=0;
+  2295  0193  1683               	bsf	status, 5	;RP0=1, select bank1
+  2296  0194  1303               	bcf	status, 6	;RP1=0, select bank1
+  2297  0195  1011               	bcf	(1160/8)^080h,(1160)&7
+  2298  0196  1091               	bcf	(1161/8)^080h,(1161)&7
+  2299  0197  1111               	bcf	(1162/8)^080h,(1162)&7
+  2300  0198  1191               	bcf	(1163/8)^080h,(1163)&7
+  2301  0199  1211               	bcf	(1164/8)^080h,(1164)&7
+  2302  019A  1291               	bcf	(1165/8)^080h,(1165)&7
+  2303  019B  1311               	bcf	(1166/8)^080h,(1166)&7
+  2304  019C  1391               	bcf	(1167/8)^080h,(1167)&7
+  2305                           	line	38
+  2306                           ;myconfiguration.c: 38: WPUA0=1;WPUA1=1;WPUA6=1;
+  2307  019D  1415               	bsf	(1192/8)^080h,(1192)&7
+  2308  019E  1495               	bsf	(1193/8)^080h,(1193)&7
+  2309  019F  1715               	bsf	(1198/8)^080h,(1198)&7
+  2310                           	line	40
+  2311                           ;myconfiguration.c: 40: WPUC1=1;WPUC2=1;WPUC3=1;
+  2312  01A0  1488               	bsf	(1089/8)^080h,(1089)&7
+  2313  01A1  1508               	bsf	(1090/8)^080h,(1090)&7
+  2314  01A2  1588               	bsf	(1091/8)^080h,(1091)&7
+  2315                           	line	42
+  2316                           ;myconfiguration.c: 42: WPDA4=0;WPDC1=0;WPDC2=0;WPDC3=0;
+  2317  01A3  1209               	bcf	(1100/8)^080h,(1100)&7
+  2318  01A4  1189               	bcf	(1099/8)^080h,(1099)&7
+  2319  01A5  1109               	bcf	(1098/8)^080h,(1098)&7
+  2320  01A6  1089               	bcf	(1097/8)^080h,(1097)&7
+  2321                           	line	43
+  2322                           	
+  2323  01A7                     l2184:	
+  2324  01A7  0008               	return
+  2325                           	opt stack 0
+  2326                           GLOBAL	__end_of_GPIO_Init
+  2327  01A8                     	__end_of_GPIO_Init:
+  2328 ;; =============== function _GPIO_Init ends ============
+  2329                           
+  2330                           	signat	_GPIO_Init,88
+  2331                           	global	_System_init
+  2332                           psect	text540,local,class=CODE,delta=2
+  2333                           global __ptext540
+  2334  0249                     __ptext540:
+  2335                           
+  2336 ;; *************** function _System_init *****************
+  2337 ;; Defined at:
+  2338 ;;		line 13 in file "myconfiguration.c"
+  2339 ;; Parameters:    Size  Location     Type
+  2340 ;;		None
+  2341 ;; Auto vars:     Size  Location     Type
+  2342 ;;		None
+  2343 ;; Return value:  Size  Location     Type
+  2344 ;;		None               void
+  2345 ;; Registers used:
+  2346 ;;		wreg, status,2
+  2347 ;; Tracked objects:
+  2348 ;;		On entry : 0/0
+  2349 ;;		On exit  : 0/0
+  2350 ;;		Unchanged: 0/0
+  2351 ;; Data sizes:     COMMON   BANK0   BANK1
+  2352 ;;      Params:         0       0       0
+  2353 ;;      Locals:         0       0       0
+  2354 ;;      Temps:          0       0       0
+  2355 ;;      Totals:         0       0       0
+  2356 ;;Total ram usage:        0 bytes
+  2357 ;; Hardware stack levels used:    1
+  2358 ;; Hardware stack levels required when called:    1
+  2359 ;; This function calls:
+  2360 ;;		Nothing
+  2361 ;; This function is called by:
+  2362 ;;		_main
+  2363 ;; This function uses a non-reentrant model
+  2364 ;;
+  2365                           psect	text540
+  2366                           	file	"myconfiguration.c"
+  2367                           	line	13
+  2368                           	global	__size_of_System_init
+  2369  000A                     	__size_of_System_init	equ	__end_of_System_init-_System_init
+  2370                           	
+  2371  0249                     _System_init:	
+  2372                           	opt	stack 6
+  2373                           ; Regs used in _System_init: [wreg+status,2]
+  2374                           	line	15
+  2375                           	
+  2376  0249                     l7494:	
+  2377                           ;myconfiguration.c: 15: OPTION = 0B00000000;
+  2378  0249  1683               	bsf	status, 5	;RP0=1, select bank1
+  2379  024A  1303               	bcf	status, 6	;RP1=0, select bank1
+  2380  024B  0181               	clrf	(129)^080h	;volatile
+  2381                           	line	16
+  2382                           	
+  2383  024C                     l7496:	
+  2384                           ;myconfiguration.c: 16: OSCCON = 0B01110000;
+  2385  024C  3070               	movlw	(070h)
+  2386  024D  008F               	movwf	(143)^080h	;volatile
+  2387                           	line	17
+  2388                           	
+  2389  024E                     l7498:	
+  2390                           ;myconfiguration.c: 17: WDTCON = 0B00001001;
+  2391  024E  3009               	movlw	(09h)
+  2392  024F  1283               	bcf	status, 5	;RP0=0, select bank0
+  2393  0250  1303               	bcf	status, 6	;RP1=0, select bank0
+  2394  0251  0098               	movwf	(24)	;volatile
+  2395                           	line	18
+  2396                           	
+  2397  0252                     l2181:	
+  2398  0252  0008               	return
+  2399                           	opt stack 0
+  2400                           GLOBAL	__end_of_System_init
+  2401  0253                     	__end_of_System_init:
+  2402 ;; =============== function _System_init ends ============
+  2403                           
+  2404                           	signat	_System_init,88
+  2405                           	global	_ISR
+  2406                           psect	text541,local,class=CODE,delta=2
+  2407                           global __ptext541
+  2408  022A                     __ptext541:
+  2409                           
+  2410 ;; *************** function _ISR *****************
+  2411 ;; Defined at:
+  2412 ;;		line 84 in file "main.c"
+  2413 ;; Parameters:    Size  Location     Type
+  2414 ;;		None
+  2415 ;; Auto vars:     Size  Location     Type
+  2416 ;;		None
+  2417 ;; Return value:  Size  Location     Type
+  2418 ;;		None               void
+  2419 ;; Registers used:
+  2420 ;;		None
+  2421 ;; Tracked objects:
+  2422 ;;		On entry : 0/0
+  2423 ;;		On exit  : 0/0
+  2424 ;;		Unchanged: 0/0
+  2425 ;; Data sizes:     COMMON   BANK0   BANK1
+  2426 ;;      Params:         0       0       0
+  2427 ;;      Locals:         0       0       0
+  2428 ;;      Temps:          4       0       0
+  2429 ;;      Totals:         4       0       0
+  2430 ;;Total ram usage:        4 bytes
+  2431 ;; Hardware stack levels used:    1
+  2432 ;; This function calls:
+  2433 ;;		Nothing
+  2434 ;; This function is called by:
+  2435 ;;		Interrupt level 1
+  2436 ;; This function uses a non-reentrant model
+  2437 ;;
+  2438                           psect	text541
+  2439                           	file	"main.c"
+  2440                           	line	84
+  2441                           	global	__size_of_ISR
+  2442  000B                     	__size_of_ISR	equ	__end_of_ISR-_ISR
+  2443                           	
+  2444  022A                     _ISR:	
+  2445                           	opt	stack 5
+  2446                           ; Regs used in _ISR: []
+  2447                           psect	intentry,class=CODE,delta=2
+  2448                           global __pintentry
+  2449  0004                     __pintentry:
+  2450                           global interrupt_function
+  2451  0004                     interrupt_function:
+  2452                           	global saved_w
+  2453  007E                     	saved_w	set	btemp+0
+  2454  0004  00FE               	movwf	saved_w
+  2455  0005  0E03               	swapf	status,w
+  2456  0006  00F0               	movwf	(??_ISR+0)
+  2457  0007  0804               	movf	fsr0,w
+  2458  0008  00F1               	movwf	(??_ISR+1)
+  2459  0009  080A               	movf	pclath,w
+  2460  000A  00F2               	movwf	(??_ISR+2)
+  2461  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+  2462  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+  2463  000D  087F               	movf	btemp+1,w
+  2464  000E  00F3               	movwf	(??_ISR+3)
+  2465  000F  2A2A               	ljmp	_ISR
+  2466                           psect	text541
+  2467                           	line	86
+  2468                           	
+  2469  022A                     i1l1114:	
+  2470  022A  0873               	movf	(??_ISR+3),w
+  2471  022B  00FF               	movwf	btemp+1
+  2472  022C  0872               	movf	(??_ISR+2),w
+  2473  022D  008A               	movwf	pclath
+  2474  022E  0871               	movf	(??_ISR+1),w
+  2475  022F  0084               	movwf	fsr0
+  2476  0230  0E70               	swapf	(??_ISR+0)^0FFFFFF80h,w
+  2477  0231  0083               	movwf	status
+  2478  0232  0EFE               	swapf	saved_w,f
+  2479  0233  0E7E               	swapf	saved_w,w
+  2480  0234  0009               	retfie
+  2481                           	opt stack 0
+  2482                           GLOBAL	__end_of_ISR
+  2483  0235                     	__end_of_ISR:
+  2484 ;; =============== function _ISR ends ============
+  2485                           
+  2486                           	signat	_ISR,88
+  2487                           psect	text542,local,class=CODE,delta=2
+  2488                           global __ptext542
+  2489  0000                     __ptext542:
+  2490                           	global	btemp
+  2491  007E                     	btemp set 07Eh
+  2492                           
+  2493                           	DABS	1,126,2	;btemp
+  2494                           	global	wtemp0
+  2495  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Mar 06 11:52:17 2019
+
+                         _i 0078                           _j 0079                          _RD 04E0  
+                        _WR 04E8               ??_ExchChannel 0074                         _CM0 00C8  
+                       _CM1 00C9                         _CM2 00CA                         _GIE 005F  
+                       _PC1 0039                         _PA6 002E                         _PC3 003B  
+                       _ISR 022A                         _SR0 0CF6                         _SR1 0CF7  
+                       fsr0 0004      __size_of_LED_Study_End 0031                        ?_ISR 0070  
+                      l1100 0050                        l1101 0064                        l1110 00BA  
+                      l1102 009C   __size_of_Write_EEPROM_u16 001D                        l1111 00BA  
+                      l1103 0084                        l1104 008B                        l1105 00A9  
+                      l1106 00B8                        l1107 00B5                        l1108 00B7  
+                      l1109 00B9                        l1097 0025                        l1098 0031  
+                      l1099 0045                        l2181 0252                        l2190 0185  
+                      l2184 01A7                        l2193 00EB                        l2187 017A  
+                      l2188 0168                        l2189 0185                        l3262 0229  
+                      l3271 01AC                        l3272 01AB                        l3280 0218  
+                      l3273 01B1                        l3265 0202                        l3274 01C1  
+                      l3275 01C0                        l3276 01C7                        l3268 0114  
+                      l3277 01C8                        l4345 0248                        l5421 0162  
+                      l5414 01E5                        l5417 0136                        l5418 013D  
+                      l7500 0186                        l7520 01B1                        _ADFM 00FF  
+                      l7514 023F                        l7522 01B7                        l7516 0248  
+                      l7524 01BE                        l7700 00F1                        l7518 01A9  
+                      l7702 00FB                        l7710 0141                        l7704 0102  
+                      l7712 0145                        l7720 0168                        l7800 0045  
+                      l7706 010D                        l7714 0152                        l7722 0171  
+                      l7730 01F3                        l7810 0059                        l7802 0047  
+                      l7708 0114                        l7716 015F                        l7732 01F9  
+                      l7724 01E9                        l7740 01D8                        l7820 007B  
+                      l7812 005D                        l7804 0048                        l7494 0249  
+                      l7718 0163                        l7726 01EB                        l7750 01DD  
+                      l7742 01D9                        l7734 01C9                        l7822 0084  
+                      l7830 009C                        l7806 004F                        l7814 0064  
+                      l7496 024C                        l7680 011D                        l7728 01EF  
+                      l7752 01E2                        l7744 01DA                        l7736 01D3  
+                      l7760 00CB                        l7832 00A7                        l7824 008B  
+                      l7816 006F                        l7808 0050                        l7498 024E  
+                      l7682 0134                        l7690 020A                        l7746 01DB  
+                      l7738 01D7                        l7762 00D3                        l7754 00BB  
+                      l7834 00A9                        l7826 0093                        l7818 0072  
+                      l7770 0012                        l7684 0136                        l7676 0115  
+                      l7692 0211                        l7748 01DC                        l7764 00DB  
+                      l7756 00BE                        l7836 00B3                        l7828 0098  
+                      l7780 0019                        l7772 0013                        _ADON 00F8  
+                      l7686 013D                        l7678 0119                        l7694 0218  
+                      l7766 00E3                        l7758 00C3                        l7790 0029  
+                      l7782 0023                        l7774 0014                        l7688 0206  
+                      l7696 0219                        l7792 0030                        l7784 0025  
+                      l7776 0015                        l7768 0011                        l7698 00EF  
+                      l7794 0031                        l7786 0026                        l7778 0016  
+                      l7796 0038                        l7788 0028                        l7798 003E  
+                      _CHS0 00FA                        _CHS1 00FB                        _CHS2 00FC  
+                      _EEIF 0067                        _DIVS 04FF                        u2500 0184  
+                      u2501 0183                        u2510 002F                        u2511 002E  
+                      u2360 01B0                        u2520 0044                        u2361 01AF  
+                      u2505 0180                        u2521 0043                        u2370 01C7  
+                      u2530 004E                        u2371 01C6                        u2531 004D  
+                      u2540 0063                        u2541 0062                        u2550 006F  
+                      u2607 015A                        u2551 006E                        u2480 011D  
+                      u2560 007B                        u2481 011C                        u2561 007A  
+                      u2570 00A7                        u2571 00A6                        u2580 00B3  
+                      u2581 00B2                        u2495 0148                        u2585 00AF  
+                      u2597 016C                        _STRA 0CE8                        _STRB 0CE9  
+                      _STRC 0CEA                        _STRD 0CEB                        _WREN 0C62  
+            ??_isKeyPressed 0074                        _main 0011                        btemp 007E  
+          __end_of_ADC_Init 01E6                 _GetADCValue 0115                        start 0010  
+        __size_of_GPIO_Init 0022              _Read_EEPROM_u8 0203        __size_of_System_init 000A  
+                     ??_ISR 0070   Read_EEPROM_u16@EepromData 0027                       _C1SEN 0CF5  
+                     _C2REN 0CF4                       _ADCS0 04FC                       _ADCS1 04FD  
+                     _ADCS2 04FE                       ?_main 0070                       _EEADR 009B  
+                     _EEDAT 009A                       _CARRY 0018                       _EEPGD 0C67  
+                     _VCFG0 00FD                       _WPDA4 044C                       _WPDC1 044B  
+                     _WPDC2 044A                       _SRCON 019E                       _WPDC3 0449  
+                     _PULSR 0CF2                       _PULSS 0CF3                       _WPUA0 04A8  
+                     _WPUA1 04A9                       _WPUC1 0441                       _WPUC2 0442  
+                     _WPUA6 04AE                       _WPUC3 0443         __end_of_ExchChannel 0163  
+                     pclath 000A                       status 0003    Read_EEPROM_u16@EEAddress 0026  
+                     wtemp0 007E      __end_of_Read_EEPROM_u8 0219             _Read_EEPROM_u16 00EC  
+      __size_of_EEPROM_Init 0011               _LED_Study_End 00BB                __end_of_main 00BB  
+    Write_EEPROM_u16@DATA_H 0023      Write_EEPROM_u16@DATA_L 0024          __size_of_Delay_xms 0023  
+                    ??_main 0029           __end_of_GPIO_Init 01A8                      _ADCON0 001F  
+                    _ADRESH 001E                      _ADRESL 009E                      _EEDATA 009A  
+                    _EECON1 009C                      _EECON2 009D                      _ANSEL0 0488  
+                    _ANSEL1 0489                      _ANSEL2 048A                      _ANSEL3 048B  
+                    _ANSEL4 048C                      _ANSEL5 048D                      _ANSEL6 048E  
+                    _ANSEL7 048F                      i1l1114 022A                      _OSCCON 008F  
+                    _OPTION 0081                      _WDTCON 0018                      _TRISA0 0428  
+                    _TRISA1 0429                      _TRISC1 0439                      _TRISC2 043A  
+                    _TRISA6 042E                      _TRISC3 043B             ?_Read_EEPROM_u8 0070  
+            ?_LED_Study_End 0070      Write_EEPROM_u8@EEDatas 0074        __end_of_isKeyPressed 0249  
+               _ExchChannel 013E    __size_of_Write_EEPROM_u8 0021                   ?_ADC_Init 0070  
+                    saved_w 007E            _Write_EEPROM_u16 01E6     __end_of_Read_EEPROM_u16 0115  
+         __end_of_Delay_xms 0186              __pcstackCOMMON 0070                  ??_ADC_Init 0076  
+   Write_EEPROM_u16@EEDatas 0020      ExchChannel@adc_ch_temp 0021     Read_EEPROM_u8@EEAddress 0020  
+                __pbssBANK0 002A             ??_LED_Study_End 0076                ?_GetADCValue 0074  
+                __pmaintext 0011                  __pintentry 0004                     _GO_DONE 00F9  
+                   _PSTRCON 019D                     _STRSYNC 0CEC           ??_Write_EEPROM_u8 0075  
+          ?_Read_EEPROM_u16 0022               ??_System_init 0074       __size_of_isKeyPressed 000A  
+              __size_of_ISR 000B            ??_Read_EEPROM_u8 0074                   _GPIO_Init 0186  
+      end_of_initialization 023D               ??_EEPROM_Init 0020                 _ADC1_ADCOUT 0076  
+              _isKeyPressed 023F    __end_of_Write_EEPROM_u16 0203         __end_of_System_init 0253  
+              ?_ExchChannel 0070           __size_of_ADC_Init 001D                  ?_GPIO_Init 0070  
+        GetADCValue@ADC_num 0022                   _Delay_xms 0163        __size_of_GetADCValue 0029  
+       __end_of_EEPROM_Init 022A         start_initialization 0235                 __end_of_ISR 0235  
+               _System_init 0249                  ?_Delay_xms 0074  Read_EEPROM_u8@ReEepromData 0021  
+           _Write_EEPROM_u8 01A8                 __pbssCOMMON 0076               __pcstackBANK0 0020  
+               ??_GPIO_Init 0074          ExchChannel@ch_temp 0020                 _EEPROM_Init 0219  
+     __end_of_LED_Study_End 00EC                   __ptext530 01E6                   __ptext531 0163  
+                 __ptext540 0249                   __ptext532 013E                   __ptext541 022A  
+                 __ptext533 00EC                   __ptext542 0000                   __ptext534 0219  
+                 __ptext535 0203                   __ptext527 0000                   __ptext536 01A8  
+                 __ptext528 00BB                   __ptext537 023F                   __ptext529 01C9  
+                 __ptext538 0115                   __ptext539 0186        __size_of_ExchChannel 0025  
+                  _ADC_Init 01C9           interrupt_function 0004                 ??_Delay_xms 0020  
+  __size_of_Read_EEPROM_u16 0029                  _ADC6_INPUT 002A     __end_of_Write_EEPROM_u8 01C9  
+         ?_Write_EEPROM_u16 0020          ??_Write_EEPROM_u16 0022   Write_EEPROM_u16@EEAddress 0025  
+  Write_EEPROM_u8@EEAddress 0075             _ADC_STUDY_VALUE 002C               __size_of_main 00AA  
+             ??_GetADCValue 0020                ?_System_init 0070     __size_of_Read_EEPROM_u8 0016  
+          ?_Write_EEPROM_u8 0074           ??_Read_EEPROM_u16 0024                  Delay_xms@i 0022  
+                Delay_xms@x 0074                    intlevel1 0000                ?_EEPROM_Init 0070  
+       __end_of_GetADCValue 013E               ?_isKeyPressed 0070  
